@@ -1,0 +1,66 @@
+body {
+    background-color: rgb(247, 245, 245);
+    font-family: 'Outfit', Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    color: rgb(27, 26, 26);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+#controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+#graph-container, .svg-container {
+    width: 90vw !important;
+    height: 80%;
+}
+.main-svg {
+    border-radius: 8px !important;
+}
+.hidden {
+    display: none;
+}
+.mode, .page {
+    margin: 10px 0;
+} 
+.page {
+    margin-top: -84px;
+}
+.mode button {
+    margin: 2.3px !important;
+    background-color: rgb(57, 96, 180);
+    border: none;
+    outline: none;
+    color: white;
+    scale: 1.1;
+    padding: 5px 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.mode button:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-right: 2px solid rgb(17, 58, 140);
+}
+.mode button:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.page button {
+    margin: 20px !important;
+    background-color: rgb(116, 148, 218);
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    color: white;
+    scale: 1.5;
+    padding: 5px 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
