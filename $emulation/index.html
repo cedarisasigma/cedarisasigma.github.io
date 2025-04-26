@@ -5,8 +5,7 @@
     <title>EmulatorJS</title>
     <link
       rel="icon"
-      href="https://Eminence5070.github.io/apps/emulatorjs
-      /docs/favicon.ico"
+      href="https://Eminence5070.github.io/apps/emulatorjs/docs/favicon.ico"
       sizes="16x16 32x32 48x48 64x64"
       type="image/vnd.microsoft.icon"
     />
@@ -89,7 +88,6 @@
       }
     </style>
   </head>
-
   <body>
     <div id="top">
       <h1>EmulatorJS Demo</h1>
@@ -100,18 +98,52 @@
       Drag ROM file or click here
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js"></script>
+
     <script>
       (async function () {
-        let enableDebug = false;
+        let enableDebug = true; // Turn on debugging
         let enableThreads = false;
+        console.log("hiya!")
+        const supportedExtensions = ["fds", "nes", "unif", "unf", "smc", "fig", "sfc", "gd3", "gd7", "dx2", "bsx", "swc", "z64", "n64", "pce", "ngp", "ngc", "ws", "wsc", "col", "cv", "d64", "nds", "gba", "gb"];
 
-        const gamefileTag = document.querySelector('gamefile');
+        function extractFileFromZip(zipUrl) {
+          console.log("Starting to fetch the ZIP file from:", zipUrl);
+          fetch(zipUrl)
+            .then(response => {
+              if (!response.ok) {
+                console.error("Failed to fetch ZIP file. Status:", response.status);
+                throw new Error("Failed to fetch ZIP file.");
+              }
+              console.log("ZIP file fetched successfully.");
+              return response.blob();
+            })
+            .then(blob => {
+              console.log("ZIP file loaded as Blob.");
+              JSZip.loadAsync(blob)
+                .then(zip => {
+                  console.log("ZIP file loaded into JSZip.");
+                  Object.keys(zip.files).forEach(fileName => {
+                    console.log("Found file:", fileName);
+                    const ext = fileName.split('.').pop().toLowerCase();
+                    if (supportedExtensions.includes(ext)) {
+                      console.log("Supported file extension found:", ext);
+                      zip.files[fileName].async('blob').then(fileData => {
+                        loadGame(fileData, fileName);
+                      });
+                    } else {
+                      console.log("Unsupported file extension:", ext);
+                    }
+                  });
+                })
+                .catch(error => console.error("Error reading ZIP file:", error));
+            })
+            .catch(error => console.error("Error fetching ZIP file:", error));
+        }
 
-        if (gamefileTag && gamefileTag.getAttribute('src')) {
-          const gameUrl = gamefileTag.getAttribute('src');
-          const parts = gameUrl.split(".");
-          const ext = parts.pop().toLowerCase();
-
+        function loadGame(fileData, fileName) {
+          console.log("Loading game:", fileName);
+          const ext = fileName.split('.').pop().toLowerCase();
           const core = (() => {
             if (["fds", "nes", "unif", "unf"].includes(ext)) return "nes";
             if (["smc", "fig", "sfc", "gd3", "gd7", "dx2", "bsx", "swc"].includes(ext)) return "snes";
@@ -124,6 +156,8 @@
             if (["nds", "gba", "gb"].includes(ext)) return ext;
             return "nes"; // default fallback core
           })();
+
+          console.log("Selected core for the game:", core);
 
           const div = document.createElement("div");
           const sub = document.createElement("div");
@@ -139,10 +173,10 @@
           div.appendChild(sub);
           document.body.appendChild(div);
 
-          const fullGameUrl = gameUrl;
+          const fullGameUrl = URL.createObjectURL(fileData);
 
           window.EJS_player = "#game";
-          window.EJS_gameName = parts.join(".");
+          window.EJS_gameName = fileName;
           window.EJS_biosUrl = "";
           window.EJS_gameUrl = fullGameUrl;
           window.EJS_core = core;
@@ -154,7 +188,25 @@
 
           script.src = "https://Eminence5070.github.io/apps/emulatorjs/data/loader.js";
           document.body.appendChild(script);
+        }
 
+        const gamefileTag = document.querySelector('gamefile');
+        if (gamefileTag && gamefileTag.getAttribute('src')) {
+          const gameUrl = gamefileTag.getAttribute('src');
+          console.log("Found <gamefile> tag with src:", gameUrl);
+          if (gameUrl.toLowerCase().endsWith(".zip")) {
+            console.log("ZIP file detected, starting extraction...");
+            extractFileFromZip(gameUrl);
+          } else {
+            console.log("Game file detected, fetching directly...");
+            fetch(gameUrl)
+              .then(response => response.blob())
+              .then(fileData => {
+                console.log("Game file fetched successfully.");
+                loadGame(fileData, gameUrl);
+              })
+              .catch(error => console.error("Error loading game file:", error));
+          }
         } else {
           console.error("<gamefile src='...'> not found or missing 'src' attribute.");
         }
