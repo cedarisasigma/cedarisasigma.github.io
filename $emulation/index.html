@@ -113,7 +113,7 @@
         let enableThreads = false;
         console.log("hiya!");
 
-        const supportedExtensions = ["fds", "nes", "unif", "unf", "smc", "fig", "sfc", "gd3", "gd7", "dx2", "bsx", "swc", "z64", "n64", "pce", "ngp", "ngc", "ws", "wsc", "col", "cv", "d64", "nds", "gba", "gb"];
+        const supportedExtensions = ["fds", "nes", "unif", "unf", "smc", "fig", "sfc", "gd3", "gd7", "dx2", "bsx", "swc", "z64", "n64", "pce", "ngp", "ngc", "ws", "wsc", "col", "cv", "d64", "nds", "gba", "gbc", "gb"];
 
         function extractFileFromZip(zipUrl) {
           console.log("Starting to fetch the ZIP file from:", zipUrl);
@@ -161,7 +161,7 @@
             if (["ws", "wsc"].includes(ext)) return "ws";
             if (["col", "cv"].includes(ext)) return "coleco";
             if (["d64"].includes(ext)) return "vice_x64sc";
-            if (["nds", "gba", "gb"].includes(ext)) return ext;
+            if (["nds", "gba", "gb", "gbc"].includes(ext)) return ext;
             return "nes"; // default fallback
           })();
 
