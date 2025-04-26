@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>EmulatorJS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100&display=swap" rel="stylesheet">
     <link
       rel="icon"
       href="https://Eminence5070.github.io/apps/emulatorjs/docs/favicon.ico"
@@ -11,13 +12,13 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      /* Your styles remain the same */
       body, html {
         height: 100%;
         background-color: black;
         color: white;
         margin: 0;
         overflow: hidden;
+        font-family: 'Outfit';
       }
       body, #box, #top {
         display: flex;
@@ -86,25 +87,32 @@
       #top {
         margin: 5px;
       }
+      .loading-text {
+        font-size: 48px;
+      }
+      .dots::after {
+        content: '';
+        animation: dots 1s steps(3, end) infinite;
+      }
+      @keyframes dots {
+        0% { content: '.'; }
+        33% { content: '..'; }
+        66% { content: '...'; }
+        100% { content: '.'; }
+      }
     </style>
   </head>
   <body>
-    <div id="top">
-      <h1>EmulatorJS Demo</h1>
-      <img src="https://Eminence5070.github.io/apps/emulatorjs/docs/Logo-light.png" alt="Logo" class="logo" />
-    </div>
-    <div id="box">
-      <input type="file" id="input " />
-      Drag ROM file or click here
-    </div>
+    <p class="loading-text">Loading gamefile<span class="dots"></span></p>
 
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js"></script>
 
     <script>
       (async function () {
-        let enableDebug = true; // Turn on debugging
+        let enableDebug = true;
         let enableThreads = false;
-        console.log("hiya!")
+        console.log("hiya!");
+
         const supportedExtensions = ["fds", "nes", "unif", "unf", "smc", "fig", "sfc", "gd3", "gd7", "dx2", "bsx", "swc", "z64", "n64", "pce", "ngp", "ngc", "ws", "wsc", "col", "cv", "d64", "nds", "gba", "gb"];
 
         function extractFileFromZip(zipUrl) {
@@ -154,7 +162,7 @@
             if (["col", "cv"].includes(ext)) return "coleco";
             if (["d64"].includes(ext)) return "vice_x64sc";
             if (["nds", "gba", "gb"].includes(ext)) return ext;
-            return "nes"; // default fallback core
+            return "nes"; // default fallback
           })();
 
           console.log("Selected core for the game:", core);
@@ -167,9 +175,12 @@
           div.id = "display";
 
           const top = document.getElementById("top");
-          top.remove();
+          if (top) top.remove();
           const box = document.getElementById("box");
-          box.remove();
+          if (box) box.remove();
+          const loadingText = document.querySelector(".loading-text");
+          if (loadingText) loadingText.remove();
+
           div.appendChild(sub);
           document.body.appendChild(div);
 
