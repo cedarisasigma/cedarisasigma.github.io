@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+	  <script>
+  const baseUrl = document.querySelector('base')?.href || window.location.href;
+
+  const overrideProperty = (obj, prop, value) => {
+    Object.defineProperty(obj, prop, {
+      get: () => value,
+      configurable: true,
+    });
+  };
+
+  overrideProperty(document, 'URL', baseUrl);
+  overrideProperty(document, 'referrer', baseUrl);
+  overrideProperty(window, 'location', { href: baseUrl });
+
+  if (window.top && window.top.location) {
+    overrideProperty(window.top, 'location', { href: baseUrl });
+  }
+</script>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
