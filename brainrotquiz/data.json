@@ -58,5 +58,9 @@
     "14": {
         "img": "assets/timcheese.webp",
         "correct": "Tim Cheese"
+    },
+    "15": {
+        "img": "assets/agent5.5.jpeg",
+        "correct": "Agent 5.5"
     }   
 }
