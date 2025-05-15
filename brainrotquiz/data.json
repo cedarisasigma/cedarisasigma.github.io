@@ -62,5 +62,9 @@
     "15": {
         "img": "assets/agent5.5.jpeg",
         "correct": "Agent 5.5"
-    }   
+    },
+    "16": {
+        "img": "assets/frigo.jpg",
+        "correct": "Frigo Camelo"
+    }      
 }
