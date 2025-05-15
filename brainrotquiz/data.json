@@ -50,5 +50,13 @@
     "12": {
         "img": "assets/bombardiro.jpeg",
         "correct": "Bombardiro Crocodilo"
-    }
+    },
+    "13": {
+        "img": "assets/johnpork.jpeg",
+        "correct": "John Pork"
+    },
+    "14": {
+        "img": "assets/timcheese.webp",
+        "correct": "Tim Cheese"
+    }   
 }
