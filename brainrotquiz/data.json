@@ -66,5 +66,9 @@
     "16": {
         "img": "assets/frigo.jpg",
         "correct": "Frigo Camelo"
-    }      
+    },
+    "17": {
+        "img": "assets/chimp.jpeg",
+        "correct": "Chimpanzini Bananini"
+    }    
 }
