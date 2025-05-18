@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jerkmate Ranked Clicker</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="stats">
+            <p>Faps per second: <span id="fps">0</span></p>
+            <p>Faps per click: <span id="total-click-value">1</span></p>
+        </div>
+        <div class="shop-item">
+            <h3><span>Lube</span> <img src="lube.svg" alt="Lube Icon"></h3>
+            <p class="description">MAKE IT SLICKER!</p>
+            <p class="details">Faps per click: <span id="lube-click-value">2</span></p>
+            <p class="cost"><span id="lube-cost">6</span> <img src="star.svg" alt="Star Icon"></p>
+            <button id="lube-button" onclick="buyUpgradeLube()">Buy</button>
+        </div>
+        <div class="shop-item">
+            <h3><span>Poster</span> <img src="poster.svg" alt="Poster Icon"></h3>
+            <p class="description">ENJOY THE VIEW!</p>
+            <p class="details">Faps per second: <span id="poster-fps">6</span></p>
+            <p class="cost"><span id="poster-cost">51</span> <img src="star.svg" alt="Star Icon"></p>
+            <button id="poster-button" onclick="buyUpgradePoster()">Buy</button>
+        </div>
+        <div class="shop-item">
+            <h3><span>Magazine</span> <img src="magazine.svg" alt="Magazine Icon"></h3>
+            <p class="description">LOOK AT THESE HOT CHICKS!</p>
+            <p class="details">Faps per second: <span id="magazine-fps">21</span></p>
+            <p class="cost"><span id="magazine-cost">249</span> <img src="star.svg" alt="Star Icon"></p>
+            <button id="magazine-button" onclick="buyUpgradeMagazine()">Buy</button>
+        </div>
+        <div class="shop-item">
+            <h3><span>Private Show</span> <img src="privateshow.svg" alt="Private Show Icon"></h3>
+            <p class="description">GO PRIVATE ON JERKMATE!</p>
+            <p class="details">Faps per second: <span id="private-show-fps">75</span></p>
+            <p class="cost"><span id="private-show-cost">1050</span> <img src="star.svg" alt="Star Icon"></p>
+            <button id="private-show-button" onclick="buyUpgradePrivateShow()">Buy</button>
+        </div>
+        <div class="shop-item">
+            <h3><span>Cam-to-Cam</span> <img src="camtocam.svg" alt="Cam-to-Cam Icon"></h3>
+            <p class="description">MAKE A CAM GIRL WATCH!</p>
+            <p class="details">Faps per second: <span id="cam-to-cam-fps">250</span></p>
+            <p class="cost"><span id="cam-to-cam-cost">5000</span> <img src="star.svg" alt="Star Icon"></p>
+            <button id="cam-to-cam-button" onclick="buyUpgradeCamToCam()">Buy</button>
+        </div>
+    </div>
+    <div class="game-container">
+        <h1>
+            
+            
+            
+            
+            
+            FAP! SHARE! WIN!</h1>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+            <div class="progress-text"><span id="progress-count">0</span>/<span id="progress-max">13</span></div>
+        </div>
+        <div class="game-screen">
+            <video id="click-video" width="520" height="440" poster="animation-poster.png" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">
+                <source src="animation.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="left-overlay"></div>
+            <div class="right-overlay"></div>
+            <button class="click-button" onclick="clickAction()" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;"></button>
+            <p class="stamina-left">(<span id="stamina-count">0</span>/10)</p>
+            <p class="stamina-right">Stamina Level: <span id="stamina-level">1</span></p>
+        </div>
+        <p class="share-text">SHARE YOUR SCORE AND GET A CHANCE TO WIN!</p>
+        <div class="divider"></div>
+        <div class="level-container">
+            <p class="level-text">YOUR LEVEL</p>
+            <img src="unranked.png" alt="Rank Icon" class="rank-icon" id="rank-icon">
+            <p class="level-display" id="rank">Unranked</p>
+        </div>
+        <div class="button-container">
+            <button class="restart-button" onclick="restartGame()">Restart</button>
+        </div>
+        <div class="stats">
+            <p class="score"><span id="score">0</span> <img src="star.svg" alt="Star Icon"></p>
+        <div class="ranking">
+            <p>Ranks:</p>
+            <ul>
+                <li>Unranked</li>
+                <li>Bronze Beater</li>
+                <li>Silver Stroker</li>
+                <li>Golden Gooner</li>
+                <li>Emerald Edger</li>
+                <li>Platinum Puller</li>
+                <li>Grandmaster Baiter</li>
+            </ul>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
