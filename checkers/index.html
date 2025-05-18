@@ -1,0 +1,3383 @@
+<!DOCTYPE html>
+<html lang="en" class="hideCMP">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5">
+        <title>Checkers - Play free | Gametable.org</title>
+        <meta name="description" content="Play the best classic Checkers game at Gametable.org. Tons of features! Pull up a chair at the game table and join the fun!">
+        <meta name="keywords" content="checkers, board game, checkers game, draughts, free, two player, against computer, gametable, game table">
+        <meta name="google" content="nositelinkssearchbox">
+        <link rel="canonical" href="https://gametable.org/games/checkers/">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff">
+        <meta name="msapplication-TileColor" content="#00ccff">
+        <meta property="og:title" content="Checkers | Gametable.org">
+        <meta property="og:type" content="website">
+        <meta property="fb:app_id" content="2292722980964504">
+        <meta property="og:image" content="https://gametable.org/res/images/og/tabletop-checkers-og-1200x1200.png">
+        <meta property="og:image:secure_url" content="https://gametable.org/res/images/og/tabletop-checkers-og-1200x1200.png">
+        <meta property="og:image:type" content="img/png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="1200">
+        <meta property="og:image:alt" content="Tabletop Checkers Logo">
+        <meta property="og:image" content="https://gametable.org/res/images/og/gametable-og-1200x1200.png">
+        <meta property="og:image:secure_url" content="https://gametable.org/res/images/og/gametable-og-1200x1200.png">
+        <meta property="og:image:type" content="img/png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="1200">
+        <meta property="og:image:alt" content="Gametable.org Logo">
+        <meta property="og:url" content="https://gametable.org/games/checkers/">
+        <meta property="og:description" content="Play the best classic Checkers game at Gametable.org. Tons of features! Pull up a chair at the game table and join the fun!">
+        <meta property="og:site_name" content="Gametable.org">
+        <script>
+            window.com = window.com || {},
+            window.com.gt = window.com.gt || {};
+            class Delegate {
+                constructor(e, t) {
+                    this.method = null,
+                    this.isSet = !1,
+                    this.invoke = this.unset,
+                    t || e ? this.set(e, t) : this.clear()
+                }
+                set(e, t=null) {
+                    if (this.scope || this.method)
+                        throw new Error("An existing delegate handler must be cleared before a new one can be set!");
+                    if (!e)
+                        throw new Error("Method must be defined! Use clear() to unset a delegate.");
+                    this.method = e,
+                    this.scope = t,
+                    this.isSet = !0,
+                    this.invoke = this.fire
+                }
+                clear() {
+                    this.method = null,
+                    this.scope = null,
+                    this.isSet = !1,
+                    this.invoke = this.unset
+                }
+                unset() {
+                    throw new Error("Tried to invoke a delegate that was not set!")
+                }
+                fire() {
+                    return this.method.apply(this.scope, arguments)
+                }
+                equals(e, t=null) {
+                    return this.scope === t && this.method === e
+                }
+            }
+            class DelegateEvent {
+                constructor() {
+                    this.count = 0,
+                    this.isEmpty = !0,
+                    this._delegates = [],
+                    this._invoking = !1,
+                    this._iterator = -1,
+                    this._iteratorStop = -1,
+                    this.invoke = this.fire0
+                }
+                add(e, t) {
+                    if (0 <= this.indexOf(e, t))
+                        throw new Error("Tried to add a delegate that was already added!");
+                    this._delegates.push(new Delegate(e,t)),
+                    1 === this._delegates.length ? this.invoke = this.fire1 : 2 <= this._delegates.length && (this.invoke = this.fire),
+                    this.count = this._delegates.length,
+                    this.isEmpty = !1
+                }
+                remove(e, t) {
+                    e = this.indexOf(e, t);
+                    if (e < 0)
+                        throw new Error("Tried to remove a delegate that was not added!");
+                    this._delegates.splice(e, 1),
+                    this._invoking && (this._iteratorStop--,
+                    this._iterator >= e) && this._iterator--,
+                    1 === this._delegates.length ? this.invoke = this.fire1 : 0 === this._delegates.length && (this.invoke = this.fire0),
+                    this.count = this._delegates.length,
+                    this.isEmpty = 0 === this.count
+                }
+                clear() {
+                    for (let e = 0; e < this._delegates.length; ++e)
+                        this._delegates[e].clear();
+                    this._delegates.length = 0,
+                    this.invoke = this.fire0,
+                    this._invoking && (this._iterator = 0,
+                    this._iteratorStop = 0),
+                    this.count = 0,
+                    this.isEmpty = !0
+                }
+                contains(e, t) {
+                    return 0 <= this.indexOf(e, t)
+                }
+                indexOf(t, o) {
+                    for (let e = 0; e < this._delegates.length; ++e)
+                        if (this._delegates[e].equals(t, o))
+                            return e;
+                    return -1
+                }
+                fire0() {}
+                fire1() {
+                    if (this._invoking)
+                        throw new Error("Tried to invoke a DelegateEvent that is currently firing. Recursive events are not supported nor advised!");
+                    this._invoking = !0,
+                    this._iterator = 0,
+                    this._iteratorStop = 1,
+                    this._delegates[0].invoke.apply(this._delegates[0], arguments),
+                    this._invoking = !1,
+                    this._iterator = -1,
+                    this._iteratorStop = -1
+                }
+                fire() {
+                    if (this._invoking)
+                        throw new Error("Tried to invoke a DelegateEvent that is currently firing. Recursive events are not supported nor advised!");
+                    var e, t = arguments;
+                    for (this._iteratorStop = this._delegates.length,
+                    this._invoking = !0,
+                    this._iterator = 0; this._iterator < this._iteratorStop; ++this._iterator)
+                        (e = this._delegates[this._iterator]).invoke.apply(e, t);
+                    this._invoking = !1,
+                    this._iterator = -1,
+                    this._iteratorStop = -1
+                }
+            }
+            let $touchend = "touchend"
+              , $mouseup = "mouseup"
+              , $invoke = "invoke"
+              , $getElementById = "getElementById"
+              , $getElementsByClassName = "getElementsByClassName"
+              , $onclick = "onclick"
+              , $classList = "classList"
+              , $addEventListener = "addEventListener"
+              , $removeEventListener = "removeEventListener"
+              , _win = window
+              , _doc = document
+              , _html = _doc.documentElement
+              , _htmlClassList = _html[$classList]
+              , _raf = requestAnimationFrame
+              , _onEvent = (e, t, o, i, n) => (e.addEventListener(t, o, {
+                capture: !i,
+                passive: !n
+            }),
+            o)
+              , _offEvent = (e, t, o, i, n) => {
+                e.removeEventListener(t, o, {
+                    capture: !i,
+                    passive: !n
+                })
+            }
+              , Page = window.com.gt.Page = ( () => {
+                let o = !0;
+                {
+                    o && console.log("Page.test");
+                    let t = _doc.createElement("img");
+                    t.onerror = t.onload = e => {
+                        "error" != e.type && t.width ? o && console.log(" Page.test -> Browser supports webp") : (_htmlClassList.add("no-webp"),
+                        o && console.log(" Page.test -> Browser does not support webp"))
+                    }
+                    ,
+                    t.src = "data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAABBxAR/Q9ERP8DAABWUDggGAAAADABAJ0BKgEAAQADADQlpAADcAD++/1QAA=="
+                }
+                let i = new DelegateEvent
+                  , n = new DelegateEvent
+                  , e = new DelegateEvent
+                  , s = {
+                    onInteractive: i,
+                    onComplete: n,
+                    onFirstInput: e,
+                    state: 0
+                }
+                  , a = () => {
+                    o && console.log("Page.window_firstInput"),
+                    o && console.log(" Page.window_firstInput -> removing first input listeners"),
+                    _offEvent(_win, $mouseup, a),
+                    _offEvent(_win, $touchend, a),
+                    e[$invoke]()
+                }
+                  , r = () => {
+                    var e = s.state
+                      , t = _doc.readyState
+                      , t = "complete" == t ? 2 : "interactive" == t ? 1 : e;
+                    o && console.log("Page.tick"),
+                    e != t && (e < 1 && (o && console.log(" Page.tick -> Page is interactive"),
+                    s.state = 1,
+                    o && console.log(" Page.tick -> Adding first input listeners"),
+                    _onEvent(_win, $mouseup, a),
+                    _onEvent(_win, $touchend, a),
+                    i[$invoke]()),
+                    1 < t) && (o && console.log(" Page.tick -> Page is complete"),
+                    s.state = 2,
+                    n[$invoke]()),
+                    t < 2 && _raf(r)
+                }
+                ;
+                return _raf(r),
+                s
+            }
+            )()
+              , dataLayer = _win.dataLayer = _win.dataLayer || []
+              , dataLayerEventQueue = []
+              , gtag = _win.gtag = function() {
+                ("event" != arguments[0] || Privacy.isReady ? dataLayer : dataLayerEventQueue).push(arguments)
+            }
+              , Privacy = com.gt.Privacy = ( () => {
+                let l = !0
+                  , c = ["eu"]
+                  , g = ["gb", "gf", "gp", "mq", "me", "yt", "re", "mf", "gi", "ax", "pm", "gl", "bl", "sx", "aw", "cw", "wf", "pf", "nc", "tf", "ai", "bm", "io", "vg", "ky", "fk", "ms", "pn", "sh", "gs", "tc", "ad", "li", "mc", "sm", "je", "gg", "ch", "br", "ng", "za", "jp", "mx", "ar"]
+                  , p = []
+                  , h = location.search.includes("force_gdpr=true")
+                  , u = "409fabaae845d6a1f4192586404af210"
+                  , n = 3e3
+                  , t = new DelegateEvent
+                  , v = !0
+                  , m = !1
+                  , s = !1
+                  , a = !1;
+                function e(s) {
+                    l && console.debug("privacy.load");
+                    {
+                        var o = () => {
+                            if (v)
+                                s();
+                            else {
+                                var t = s;
+                                function o() {
+                                    l && console.debug("privacy.load.loadOptOut.script_error"),
+                                    n()
+                                }
+                                function i() {
+                                    l && console.debug("privacy.load.loadOptOut.window_CookieScriptLoaded"),
+                                    m = !0,
+                                    n()
+                                }
+                                function n() {
+                                    e.removeEventListener("error", o),
+                                    window.removeEventListener("CookieScriptLoaded", i),
+                                    t()
+                                }
+                                let e = document.createElement("script");
+                                e.addEventListener("error", o),
+                                window.addEventListener("CookieScriptLoaded", i),
+                                e.src = "/js/cs.js",
+                                document.head.appendChild(e)
+                            }
+                        }
+                        , i;
+                        function n() {
+                            l && console.debug("privacy.load.loadOptIn.script_error"),
+                            d()
+                        }
+                        function a() {
+                            l && console.debug("privacy.load.loadOptIn.window_CookieScriptLoaded"),
+                            m = !0,
+                            d()
+                        }
+                        function r() {
+                            l && console.debug("privacy.load.loadOptIn.window_CookieScriptOutsideGeoLoaded"),
+                            v = !1,
+                            d()
+                        }
+                        function d() {
+                            e.removeEventListener("error", n),
+                            window.removeEventListener("CookieScriptLoaded", a),
+                            window.removeEventListener("CookieScriptOutsideGeoLoaded", r),
+                            o()
+                        }
+                        l && console.debug("privacy.load.loadOptIn");
+                        let e = document.createElement("script")
+                          , t = (e.addEventListener("error", n),
+                        window.addEventListener("CookieScriptLoaded", a),
+                        window.addEventListener("CookieScriptOutsideGeoLoaded", r),
+                        "https://cdn.cookie-script.com/s/" + u + ".js");
+                        !h && (g.length || c.length || p.length) && (i = [],
+                        g.length && i.push("country=" + g.join("-")),
+                        p.length && i.push("state=" + p.join("-")),
+                        c.length && i.push("region=" + c.join("-")),
+                        t = "https://geo.cookie-script.com/s/" + u + ".js?" + i.join("&")),
+                        e.src = t,
+                        document.head.appendChild(e)
+                    }
+                }
+                function o(e) {
+                    function t() {
+                        setTimeout(e, 100)
+                    }
+                    var o, i;
+                    l && console.debug("privacy.initConsent"),
+                    v ? (i = t,
+                    l && console.debug("privacy.initConsent.initConsentOptIn"),
+                    m ? CookieScript.instance.currentState().action ? (l && console.debug(" user has an existing consent action"),
+                    setTimeout( () => {
+                        document.documentElement.classList.remove("hideCMP")
+                    }
+                    , n),
+                    i()) : (l && console.debug(" waiting for an initial consent action from the user..."),
+                    CookieScript.instance.hide(),
+                    setTimeout( () => {
+                        function t(e) {
+                            l && console.debug("privacy.initConsent.initConsentOptIn.initialConsentAction:", e.type),
+                            window.removeEventListener("CookieScriptAcceptAll", t),
+                            window.removeEventListener("CookieScriptAccept", t),
+                            window.removeEventListener("CookieScriptReject", t),
+                            window.removeEventListener("CookieScriptClose", t),
+                            i()
+                        }
+                        document.documentElement.classList.remove("hideCMP"),
+                        CookieScript.instance.show(),
+                        a = s = !1,
+                        window.addEventListener("CookieScriptAcceptAll", t),
+                        window.addEventListener("CookieScriptAccept", t),
+                        window.addEventListener("CookieScriptReject", t),
+                        window.addEventListener("CookieScriptClose", t)
+                    }
+                    , n)) : i()) : (o = t,
+                    l && console.debug("privacy.initConsent.initConsentOptOut"),
+                    m ? CookieScript.instance.currentState().action ? (l && console.debug(" user has an existing consent action"),
+                    setTimeout( () => {
+                        document.documentElement.classList.remove("hideCMP")
+                    }
+                    , n),
+                    o()) : (l && console.debug(" waiting for an initial consent action..."),
+                    CookieScript.instance.hide(),
+                    setTimeout( () => {
+                        function t(e) {
+                            l && console.debug("privacy.initConsent.initConsentOptOut.initialConsentAction:", e.type),
+                            setTimeout( () => {
+                                document.documentElement.classList.remove("hideCMP")
+                            }
+                            , n),
+                            window.removeEventListener("CookieScriptAcceptAll", t),
+                            window.removeEventListener("CookieScriptAccept", t),
+                            window.removeEventListener("CookieScriptReject", t),
+                            window.removeEventListener("CookieScriptClose", t),
+                            o()
+                        }
+                        window.addEventListener("CookieScriptAcceptAll", t),
+                        window.addEventListener("CookieScriptAccept", t),
+                        window.addEventListener("CookieScriptReject", t),
+                        window.addEventListener("CookieScriptClose", t),
+                        CookieScript.instance.acceptAllAction()
+                    }
+                    , n)) : (gtag("consent", "update", {
+                        ad_storage: "granted",
+                        analytics_storage: "granted",
+                        ad_personalization: "granted",
+                        ad_user_data: "granted",
+                        security_storage: "granted",
+                        personalization_storage: "granted",
+                        functionality_storage: "granted"
+                    }),
+                    o()))
+                }
+                function i(e) {
+                    var t;
+                    return !m || void 0 === (t = CookieScript.instance.currentState()).action ? !v : "accept" === t.action && !(!t.categories || !t.categories.includes(e)) || !CookieScript.instance.categories().includes(e) && !v
+                }
+                function r() {
+                    var e = i("targeting")
+                      , t = i("performance")
+                      , e = {
+                        ads_data_redaction: !e,
+                        restricted_data_processing: !e,
+                        allow_ad_personalization_signals: e,
+                        allow_google_signals: t,
+                        url_passthrough: !e || !t
+                    };
+                    l && console.debug("privacy.updatePrivacySettings", e),
+                    gtag("set", e)
+                }
+                let d = {
+                    onReady: t,
+                    isReady: !1,
+                    settings: () => {
+                        s = !0
+                    }
+                    ,
+                    optOut: () => {
+                        a = !0
+                    }
+                    ,
+                    dump: () => {
+                        console.debug("privacy.stub_dump: CMP not ready")
+                    }
+                    ,
+                    isConsented: i
+                };
+                return Page.onFirstInput.add(function() {
+                    gtag("consent", "default", {
+                        ad_storage: "denied",
+                        analytics_storage: "denied",
+                        ad_user_data: "denied",
+                        ad_personalization: "denied"
+                    }),
+                    e( () => {
+                        o( () => {
+                            var e;
+                            for (r(),
+                            v && m ? (window.addEventListener("CookieScriptAcceptAll", r),
+                            window.addEventListener("CookieScriptAccept", r),
+                            window.addEventListener("CookieScriptReject", r)) : (e = () => {
+                                location.reload()
+                            }
+                            ,
+                            window.addEventListener("CookieScriptAcceptAll", e),
+                            window.addEventListener("CookieScriptAccept", e),
+                            window.addEventListener("CookieScriptReject", e)),
+                            gtag("js", new Date),
+                            gtag("config", "UA-122842685-2"),
+                            d.optOut = () => {
+                                m && CookieScript.instance.rejectAllAction()
+                            }
+                            ,
+                            d.settings = () => {
+                                m && CookieScript.instance.show()
+                            }
+                            ,
+                            d.dump = () => {
+                                if (console.debug("privacy state:"),
+                                console.debug(" cmpLoaded:", m),
+                                console.debug(" isOptInRegulation:", v),
+                                m && v) {
+                                    var e, t, o = CookieScript.instance.categories(), i = CookieScript.instance.currentState();
+                                    console.debug(" categories:");
+                                    for (e of o)
+                                        console.debug(" " + e);
+                                    console.debug(" currentState.action:", i.action),
+                                    console.debug(" currentState.categories:");
+                                    for (t of i.categories)
+                                        console.debug(" " + t)
+                                }
+                            }
+                            ,
+                            d.isReady = !0; dataLayerEventQueue.length; )
+                                gtag.apply(_win, dataLayerEventQueue.shift());
+                            l && d.dump(),
+                            t[$invoke](),
+                            a ? d.optOut() : s && d.settings()
+                        }
+                        )
+                    }
+                    )
+                }, null),
+                d
+            }
+            )()
+              , Analytics = com.gt.Analytics = ( () => {
+                let i = 0;
+                var e = {
+                    track: function(e, t) {
+                        gtag("event", e, t)
+                    }
+                };
+                return Privacy.onReady.add(function() {
+                    console.debug("analytics.init");
+                    let o = "https://www.googletagmanager.com/gtag/js?id=UA-122842685-2";
+                    {
+                        console.debug("analytics.init.loadXHR");
+                        let t = new XMLHttpRequest;
+                        t.open("GET", o),
+                        t.responseType = "text",
+                        t.onabort = t.onerror = t.onload = e => {
+                            i = "load" == e.type && 200 <= t.status && t.status < 300 ? t.responseText.includes("uBlock") ? 3 : 1 : 2,
+                            console.log("analytics.init.loadXHR.onresult", ["Unknown", "Allowed", "Blocked", "SpoofUBlock"][i], e.type, t.status, e),
+                            t.onabort = t.onerror = t.onload = t = null,
+                            console.debug("analytics.init.loadScript"),
+                            1 == i && ((e = _doc.createElement("script")).src = o,
+                            _doc.head.appendChild(e))
+                        }
+                        ,
+                        t.send()
+                    }
+                }, null),
+                e
+            }
+            )()
+              , AdWidthMap = {
+                w120: 120,
+                w160: 160,
+                w320: 320,
+                w336: 336,
+                w468: 468,
+                w728: 728
+            }
+              , AdHeightMap = {
+                h60: 60,
+                h90: 90,
+                h120: 120,
+                h180: 180,
+                h250: 250,
+                h480: 480,
+                h600: 600
+            }
+              , AdSlotSizes = [[1940, 500], [1456, 180], [1024, 768], [980, 120], [980, 90], [970, 250], [970, 90], [970, 66], [960, 90], [950, 90], [936, 120], [930, 180], [768, 1024], [750, 300], [750, 200], [750, 100], [736, 414], [728, 90], [672, 560], [640, 200], [640, 100], [600, 1200], [600, 500], [600, 314], [600, 100], [580, 400], [500, 500], [480, 800], [480, 320], [468, 60], [414, 736], [400, 400], [336, 280], [320, 1200], [320, 480], [320, 400], [320, 320], [320, 100], [320, 50], [300, 1050], [300, 600], [292, 30], [250, 360], [250, 250], [240, 400], [240, 133], [234, 60], [220, 90], [216, 54], [216, 36], [200, 446], [200, 200], [180, 150], [168, 42], [168, 28], [160, 600], [125, 125], [120, 600], [120, 240], [120, 90], [120, 60], [120, 30], [120, 20], [88, 31]];
+            class AdSpace {
+                constructor(e) {
+                    if (this.adSets = [],
+                    DEBUG_ADS && console.log("AdSpace()", e),
+                    (this.div = e).classList.contains("rail"))
+                        if (this.type = 0,
+                        e.classList.contains("l"))
+                            this.position = 0;
+                        else {
+                            if (!e.classList.contains("r"))
+                                throw new Error("No position");
+                            this.position = 1
+                        }
+                    else {
+                        if (!e.classList.contains("bar"))
+                            throw new Error("No type");
+                        if (this.type = 1,
+                        e.classList.contains("b"))
+                            this.position = 3;
+                        else {
+                            if (!e.classList.contains("t"))
+                                throw new Error("No position");
+                            this.position = 2
+                        }
+                    }
+                    if (Ads.adSpaceMap.has(e))
+                        throw new Error("Already mapped");
+                    Ads.adSpaceMap.set(e, this),
+                    Ads.adSpaces.push(this);
+                    var t = e.querySelectorAll("div.aset");
+                    for (let e = 0; e < t.length; ++e)
+                        new AdSet(this,t.item(e))
+                }
+            }
+            class AdSet {
+                constructor(e, t) {
+                    this.adSlots = [],
+                    DEBUG_ADS && console.log("AdSet()", e, t),
+                    this.adSpace = e,
+                    this.div = t;
+                    let o, i;
+                    if (0 === e.type) {
+                        for (var n in AdWidthMap)
+                            if (t.classList.contains(n)) {
+                                o = AdWidthMap[n];
+                                break
+                            }
+                        if (void 0 === o)
+                            throw new Error("Could not determine ad width")
+                    } else {
+                        if (1 !== e.type)
+                            throw new Error("Unknown ad space type");
+                        for (var s in AdHeightMap)
+                            if (t.classList.contains(s)) {
+                                i = AdHeightMap[s];
+                                break
+                            }
+                        if (void 0 === i)
+                            throw new Error("Could not determine ad height")
+                    }
+                    if (this.w = o,
+                    this.h = i,
+                    Ads.adSetMap.has(t))
+                        throw new Error("Already mapped");
+                    Ads.adSetMap.set(t, this),
+                    Ads.adSets.push(this),
+                    e.adSets.push(this);
+                    var a = t.querySelectorAll("div.aslot");
+                    for (let e = 0; e < a.length; ++e)
+                        new AdSlot(this,a.item(e))
+                }
+            }
+            class AdSlot {
+                constructor(e, t) {
+                    this.visibility = -1,
+                    this.state = 0,
+                    this.gptSlot = null,
+                    this.lastRender = 0,
+                    this.lastState = 0,
+                    DEBUG_ADS && console.log("AdSlot()", e, t),
+                    this.adSet = e,
+                    this.div = t;
+                    let o = e.w;
+                    for (var i in AdWidthMap)
+                        if (t.classList.contains(i)) {
+                            o = AdWidthMap[i];
+                            break
+                        }
+                    if (void 0 === o)
+                        throw new Error("No width");
+                    let n = e.h;
+                    for (var s in AdHeightMap)
+                        if (t.classList.contains(s)) {
+                            n = AdHeightMap[s];
+                            break
+                        }
+                    if (void 0 === n)
+                        throw new Error("No height");
+                    if (this.w = o,
+                    this.h = n,
+                    this.gptDiv = t.querySelector("div"),
+                    !this.gptDiv)
+                        throw new Error("No gpt div");
+                    if (this.adUnitPath = this.gptDiv.id,
+                    !this.adUnitPath)
+                        throw new Error("No ad unit path");
+                    if (Ads.adSlotMap.has(t))
+                        throw new Error("Already mapped");
+                    if (Ads.gptDivMap.has(this.gptDiv))
+                        throw new Error("GPT div already mapped");
+                    if (Ads.adUnitPathMap[this.adUnitPath])
+                        throw new Error("Ad unit path already mapped");
+                    Ads.adSlotMap.set(this.div, this),
+                    Ads.adSlots.push(this),
+                    Ads.gptDivMap.set(this.gptDiv, this),
+                    Ads.adUnitPathMap[this.adUnitPath] = this,
+                    e.adSlots.push(this),
+                    Ads.visibilityObserver.observe(this.div)
+                }
+                init() {
+                    DEBUG_ADS && console.log("AdSlot.init", this.adUnitPath);
+                    var e, t = [];
+                    for (e of AdSlotSizes)
+                        e[0] <= this.w && e[1] <= this.h && t.push(e);
+                    this.gptSlot = googletag.defineSlot("/23297412014/" + this.adUnitPath, t, this.gptDiv.id),
+                    this.gptSlot ? (Ads.gptSlotMap.set(this.gptSlot, this),
+                    this.gptSlot.setTargeting("refresh", "true").addService(googletag.pubads())) : (DEBUG_ADS && console.warn("Failed to define gpt slot"),
+                    this.state = -1)
+                }
+                update(e) {
+                    this.gptSlot && 1 === this.visibility && (0 === this.state || 3 === this.state || 4 === this.state) && 86400000 < Date.now() - this.lastRender && e.push(this)
+                }
+                loading() {
+                    if (0 !== this.state && 3 !== this.state && 4 !== this.state)
+                        throw new Error("invalid");
+                    this.lastState = this.state,
+                    this.state = 1
+                }
+                viewed(e) {
+                    if (2 !== this.state)
+                        throw new Error("invalid");
+                    this.state = 3
+                }
+                rendered(e) {
+                    if (1 !== this.state)
+                        throw new Error("invalid");
+                    if (this.lastRender = Date.now(),
+                    e.isEmpty)
+                        if (0 === this.lastState)
+                            this.state = 0;
+                        else {
+                            if (3 !== this.lastState && 4 !== this.lastState)
+                                throw new Error("invalid");
+                            this.state = 4
+                        }
+                    else
+                        this.state = 2,
+                        console.log(this.adUnitPath, "rendered", e.size[0], e.size[1])
+                }
+                updateVisibility(e) {
+                    var t = e ? 1 : 0;
+                    t !== this.visibility && (this.visibility = t,
+                    DEBUG_ADS) && console.log("AdSlot", e ? "SHOWN" : "HIDDEN", this.adUnitPath)
+                }
+            }
+            let DEBUG_ADS = !0
+              , googletag = _win.googletag = _win.googletag || {};
+            googletag.cmd = googletag.cmd || [];
+            let Ads, Modal = (com.gt.Ads = ( () => {
+                let o = new DelegateEvent
+                  , i = !1
+                  , n = 0;
+                var e = new Map
+                  , t = new Map;
+                let s = new Map
+                  , a = [];
+                var r = new Map
+                  , d = Object.create(null);
+                let l = new Map;
+                var c = new IntersectionObserver( (e, t) => {
+                    for (var o of e) {
+                        var i = s.get(o.target);
+                        if (!i)
+                            throw new Error("Could not match ad slot");
+                        i.updateVisibility(o.isIntersecting)
+                    }
+                }
+                );
+                let g = 0;
+                function p(e) {
+                    let i = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
+                    {
+                        var o = () => {
+                            var o = () => {
+                                var t = () => {
+                                    e()
+                                }
+                                ;
+                                if (DEBUG_ADS && console.log("Ads.loadGPT.cmdInit"),
+                                n < 2) {
+                                    DEBUG_ADS && console.log(" Ads.loadGPT.cmdInit -> setting googletag init cmd with timeout");
+                                    let e = setTimeout( () => {
+                                        DEBUG_ADS && console.log(" Ads.loadGPT.cmdInit.cb -> timeout, marking as blocked"),
+                                        e = 0,
+                                        n = 2,
+                                        t()
+                                    }
+                                    , 3e3);
+                                    googletag.cmd.push( () => {
+                                        0 < e ? (DEBUG_ADS && console.log(" Ads.loadGPT.cmdInit.cb -> function called successfully, marking as init"),
+                                        clearTimeout(e),
+                                        e = 0,
+                                        n = 1,
+                                        t()) : DEBUG_ADS && console.warn(" Ads.loadGPT.cmdInit.cb -> ignoring, function called late")
+                                    }
+                                    )
+                                } else
+                                    DEBUG_ADS && console.log(" Ads.loadGPT.cmdInit -> Ignoring, already found to be blocked"),
+                                    t()
+                            }
+                            ;
+                            if (DEBUG_ADS && console.log("Ads.loadGPT.loadScript"),
+                            n < 2) {
+                                DEBUG_ADS && console.log(" Ads.loadGPT.loadScript -> loading script");
+                                let t = _doc.createElement("script");
+                                t.crossOrigin = "anonymous",
+                                t.onabort = t.onerror = t.onload = e => {
+                                    DEBUG_ADS && console.log(" Ads.loadGPT.loadScript.evt ->", e.type),
+                                    "load" == e.type ? DEBUG_ADS && console.log(" Ads.loadGPT.loadScript.evt -> script loaded successfully") : (DEBUG_ADS && console.log(" Ads.loadGPT.loadScript.evt -> script load failed, marking as blocked"),
+                                    n = 2),
+                                    t.onabort = t.onerror = t.onload = t = null,
+                                    o()
+                                }
+                                ,
+                                t.src = i,
+                                document.head.appendChild(t)
+                            } else
+                                DEBUG_ADS && console.log(" Ads.loadGPT.loadScript -> Ignoring, already found to be blocked"),
+                                o()
+                        }
+                        ;
+                        DEBUG_ADS && console.debug("Ads.loadGPT.loadXHR");
+                        let t = new XMLHttpRequest;
+                        t.open("GET", i),
+                        t.responseType = "text",
+                        t.onabort = t.onerror = t.onload = e => {
+                            DEBUG_ADS && console.log(" Ads.loadGPT.loadXHR.evt ->", e.type, t.status),
+                            "load" == e.type && 200 <= t.status && t.status < 300 ? "string" != typeof t.responseText || "" == t.responseText.trim() || t.responseText.includes("uBlock") ? (DEBUG_ADS && console.debug(" Ads.loadGPT.loadXHR.evt -> gpt xhr is spoofed, marking as blocked"),
+                            n = 2) : DEBUG_ADS && console.debug(" Ads.loadGPT.loadXHR.evt -> gpt xhr loaded successfully") : (DEBUG_ADS && console.debug(" Ads.loadGPT.loadXHR.evt -> gpt xhr failed to load, marking as blocked"),
+                            n = 2),
+                            t.onabort = t.onerror = t.onload = t = null,
+                            o()
+                        }
+                        ,
+                        DEBUG_ADS && console.log(" Ads.loadGPT.loadXHR -> loading xhr"),
+                        t.send()
+                    }
+                }
+                function h() {
+                    if (250 <= Date.now() - g) {
+                        var t, o = [];
+                        let e = !1;
+                        for (t of a)
+                            t.update(o),
+                            1 === t.state && (e = !0);
+                        if (!e && 0 < o.length) {
+                            var i, n = [];
+                            for (i of o)
+                                i.loading(),
+                                n.push(i.gptSlot);
+                            googletag.pubads().refresh(n)
+                        }
+                    }
+                    setTimeout(h, 1e3)
+                }
+                let u = Object.freeze({
+                    onReady: o,
+                    get blockStatus() {
+                        return n
+                    },
+                    get isReady() {
+                        return i
+                    }
+                });
+                return Ads = {
+                    onReady: o,
+                    get blockStatus() {
+                        return n
+                    },
+                    get isReady() {
+                        return i
+                    },
+                    adSpaceMap: e,
+                    adSpaces: [],
+                    adSetMap: t,
+                    adSets: [],
+                    adSlotMap: s,
+                    adSlots: a,
+                    gptDivMap: r,
+                    adUnitPathMap: d,
+                    gptSlotMap: l,
+                    visibilityObserver: c
+                },
+                Privacy.onReady.add(function() {
+                    DEBUG_ADS && console.log("Ads.init");
+                    var t = _html.querySelectorAll("div.aspace");
+                    for (let e = 0; e < t.length; ++e)
+                        console.log("creating ad space"),
+                        new AdSpace(t.item(e));
+                    DEBUG_ADS && console.log(" Ads.init -> loading gpt"),
+                    p( () => {
+                        if (DEBUG_ADS && console.log(" Ads.init -> gpt load resolved"),
+                        1 === n) {
+                            let t = (e, t) => {
+                                "slotRenderEnded" === e ? l.get(t.slot).rendered(t) : "impressionViewable" === e && l.get(t.slot).viewed(t)
+                            }
+                            ;
+                            googletag.pubads().addEventListener("impressionViewable", e => {
+                                t("impressionViewable", e)
+                            }
+                            ),
+                            googletag.pubads().addEventListener("rewardedSlotClosed", e => {
+                                t("rewardedSlotClosed", e)
+                            }
+                            ),
+                            googletag.pubads().addEventListener("rewardedSlotGranted", e => {
+                                t("rewardedSlotGranted", e)
+                            }
+                            ),
+                            googletag.pubads().addEventListener("rewardedSlotReady", e => {
+                                t("rewardedSlotReady", e)
+                            }
+                            ),
+                            googletag.pubads().addEventListener("slotOnload", e => {
+                                t("slotOnload", e)
+                            }
+                            ),
+                            googletag.pubads().addEventListener("slotRenderEnded", e => {
+                                t("slotRenderEnded", e)
+                            }
+                            ),
+                            googletag.pubads().addEventListener("slotRequested", e => {
+                                t("slotRequested", e)
+                            }
+                            ),
+                            googletag.pubads().addEventListener("slotResponseReceived", e => {
+                                t("slotResponseReceived", e)
+                            }
+                            ),
+                            googletag.pubads().addEventListener("slotVisibilityChanged", e => {
+                                t("slotVisibilityChanged", e)
+                            }
+                            ),
+                            googletag.setConfig({
+                                adExpansion: {
+                                    enabled: !1
+                                }
+                            }),
+                            googletag.pubads().disableInitialLoad(),
+                            googletag.pubads().enableSingleRequest();
+                            for (var e of a)
+                                e.init();
+                            googletag.enableServices(),
+                            window.addEventListener("resize", () => {
+                                DEBUG_ADS && console.log("Ads.window_resize"),
+                                g = Date.now()
+                            }
+                            , {
+                                capture: !0,
+                                passive: !0
+                            }),
+                            setTimeout(h, 50)
+                        }
+                        i = !0,
+                        o.invoke(u)
+                    }
+                    )
+                }, null),
+                u
+            }
+            )(),
+            Page.onInteractive.add( () => {
+                let e = _doc[$getElementById]("menu");
+                e && (_doc[$getElementById]("menuBtn")[$onclick] = () => {
+                    _htmlClassList.add("menu-open"),
+                    e[$classList].add("open"),
+                    Analytics.track("open", {
+                        event_category: "site: menu"
+                    })
+                }
+                ,
+                (e[$getElementsByClassName]("active")[0] || {})[$onclick] = e[$getElementsByClassName]("dimmer")[0][$onclick] = e[$getElementsByClassName]("logo")[0].children[0][$onclick] = e[$getElementsByClassName]("close-btn")[0][$onclick] = () => {
+                    _htmlClassList.remove("menu-open"),
+                    e[$classList].remove("open"),
+                    Analytics.track("close", {
+                        event_category: "site: menu"
+                    })
+                }
+                )
+            }
+            , null),
+            com.gt.Modal = ( () => {
+                let i, e, o, n, s = [], a, r;
+                function d() {
+                    if (!a && s.length && i) {
+                        for (com.gt.App && com.gt.App.interrupt(),
+                        com.gt.Analytics.track("open", {
+                            event_category: "site: modal"
+                        }),
+                        a = 1,
+                        r = s.shift(),
+                        n.innerHTML = r[0]; 0 < o.children.length; )
+                            o.removeChild(o.children[0]);
+                        for (let e = 0; e < r[2].length; ++e) {
+                            var t = _doc.createElement("div");
+                            t.classList.add("modal-btn"),
+                            t.innerHTML = r[2][e].txt,
+                            t[$addEventListener]("click", p, {
+                                capture: !0,
+                                passive: !0
+                            }),
+                            t.btnIdx = e,
+                            o.appendChild(t)
+                        }
+                        r[1] ? i[$classList].add("dismissable") : i[$classList].remove("dismissable"),
+                        e[$addEventListener]("click", c),
+                        _win[$addEventListener]("keydown", g, !0),
+                        _win[$addEventListener]("touchmove", l, {
+                            capture: !0,
+                            passive: !1
+                        }),
+                        _htmlClassList.add("modal-open"),
+                        _doc[$addEventListener]("wheel", l, {
+                            capture: !0,
+                            passive: !1
+                        })
+                    }
+                }
+                function t() {
+                    if (a) {
+                        com.gt.Analytics.track("close", {
+                            event_category: "site: modal"
+                        }),
+                        a = 0,
+                        e[$removeEventListener]("click", c),
+                        _win[$removeEventListener]("keydown", g, !0),
+                        _win[$removeEventListener]("touchmove", l, {
+                            capture: !0,
+                            passive: !1
+                        });
+                        for (let e = 0; e < o.children.length; ++e)
+                            o.children[e][$removeEventListener]("click", p, {
+                                capture: !0
+                            }),
+                            o.children[e].btnIdx = -1;
+                        _htmlClassList.remove("modal-open"),
+                        _doc[$removeEventListener]("wheel", l, {
+                            capture: !0,
+                            passive: !1
+                        }),
+                        r = null,
+                        setTimeout(d, 10)
+                    }
+                }
+                function l(e) {
+                    e.cancelable && e.preventDefault()
+                }
+                function c() {
+                    r && r[1] && t()
+                }
+                function g(e) {
+                    a && (e.stopPropagation(),
+                    e.stopImmediatePropagation(),
+                    e.preventDefault()),
+                    r && r[1] && ("Escape" == e.key || "Esc" == e.key) && t()
+                }
+                function p(e) {
+                    r && e && e.currentTarget && (e = e.currentTarget.btnIdx,
+                    r[2][e]) && r[2][e].cb && r[2][e].cb(),
+                    t()
+                }
+                var h = {
+                    show: function(e, t, o) {
+                        i && (t = t || [],
+                        o = o || !t.length,
+                        s.push([e, o, t]),
+                        d())
+                    }
+                };
+                return Page.onInteractive.add(function() {
+                    (i = _doc[$getElementById]("modal")) && (e = i[$getElementsByClassName]("dimmer")[0],
+                    o = i[$getElementsByClassName]("modal-btns")[0],
+                    n = i[$getElementsByClassName]("modal-text")[0],
+                    d())
+                }, null),
+                h
+            }
+            )());
+            ( () => {
+                let e, t, r, d, l, c, g, p, h, u, v, m, w, f, E, A, S, _, y, b = null;
+                function o() {
+                    m.innerText = v.value.length + " / 500"
+                }
+                function i(e) {
+                    let t;
+                    e = e.currentTarget;
+                    if (e == l)
+                        t = d;
+                    else if (e == g)
+                        t = c;
+                    else if (e == h)
+                        t = p;
+                    else if (e == v)
+                        t = u;
+                    else {
+                        if (e != f)
+                            return;
+                        t = w
+                    }
+                    t.classList.remove("err"),
+                    r.classList.remove("has-err")
+                }
+                function n(e) {
+                    if (!_) {
+                        var t, o = l.value.trim().toLowerCase(), i = g.value.trim(), n = h.value.trim(), s = v.value.trim(), a = C(f.value);
+                        let e = 1;
+                        "" != (t = o) && /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(t) || (e = !1,
+                        d.classList.add("err"),
+                        "" == o && (l.value = "")),
+                        "" == i && (e = !1,
+                        c.classList.add("err"),
+                        g.value = ""),
+                        "" == n && (e = !1,
+                        p.classList.add("err")),
+                        "" == s && (e = !1,
+                        u.classList.add("err"),
+                        v.value = "",
+                        m.innerText = "0 / 500"),
+                        a != b && (e = !1,
+                        w.classList.add("err"),
+                        f.value = "",
+                        b = L()),
+                        e ? (t = o,
+                        a = i,
+                        o = n,
+                        i = s,
+                        _ || (_ = !0,
+                        r.style.pointerEvents = "none",
+                        l.disabled = g.disabled = h.disabled = v.disabled = f.disabled = A.disabled = !0,
+                        A.innerText = "Please wait...",
+                        S.style.display = "none",
+                        (y = new XMLHttpRequest).onreadystatechange = k,
+                        y.open("POST", document.location.protocol + "//" + document.location.hostname + ":3000/contact", !0),
+                        y.setRequestHeader("Content-Type", "application/json;charset=UTF-8"),
+                        y.send(JSON.stringify({
+                            email: t,
+                            name: a,
+                            topic: o,
+                            msg: i
+                        })))) : r.classList.add("has-err")
+                    }
+                    return e.preventDefault(),
+                    !1
+                }
+                function k() {
+                    4 == y.readyState && (200 == y.status ? (e.innerText = "Thank you!",
+                    t.innerText = "Thanks for contacting us. We'll have someone reach out to you, be sure to check your email: " + l.value.trim(),
+                    r.style.display = "none") : (_ = !1,
+                    r.style.pointerEvents = "auto",
+                    l.disabled = g.disabled = h.disabled = v.disabled = f.disabled = A.disabled = !1,
+                    A.innerText = "SUBMIT",
+                    S.style.display = "block"),
+                    y.onreadystatechange = null,
+                    y = null)
+                }
+                function L() {
+                    var e = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789".split("");
+                    let t = "";
+                    let o, i, n, s;
+                    for (o = 0; o < 6; ++o)
+                        t += e[Math.floor(Math.random() * e.length)];
+                    var a = E.getContext("2d");
+                    for (a.setTransform(1, 0, 0, 1, 0, 0),
+                    a.clearRect(0, 0, 180, 40),
+                    a.textBaseline = "middle",
+                    a.textAlign = "center",
+                    a.font = "normal bold 20px Arial",
+                    o = 0; o < 6; ++o)
+                        a.fillStyle = "#" + D(12, 0) + D(13, 0) + D(12, 0) + D(13, 0) + D(12, 0) + D(13, 0),
+                        i = 15 * (2 * o + 1),
+                        n = 5 - 10 * Math.random() + E.height / 2,
+                        s = 20 - 40 * Math.random(),
+                        a.setTransform(1, 0, 0, 1, 0, 0),
+                        a.translate(i, n),
+                        a.rotate(s * Math.PI / 180),
+                        a.fillText(t.charAt(o), 0, 0);
+                    return C(t)
+                }
+                function C(e) {
+                    let t = 0, o, i;
+                    if (0 != e.length)
+                        for (o = 0; o < e.length; o++)
+                            i = e.charCodeAt(o),
+                            t = (t << 5) - t + i,
+                            t |= 0;
+                    return t
+                }
+                function D(e, t) {
+                    e = Math.floor(Math.random() * e);
+                    return 15 <= (e += t) ? "F" : 14 == e ? "E" : 13 == e ? "D" : 12 == e ? "C" : 11 == e ? "B" : 10 == e ? "A" : e + ""
+                }
+                Page.onInteractive.add(function() {
+                    (e = _doc[$getElementById]("contactIntroHeading")) && (t = _doc[$getElementById]("contactIntroText"),
+                    r = _doc[$getElementById]("contactForm"),
+                    d = _doc[$getElementById]("contactEmailLbl"),
+                    l = _doc[$getElementById]("contactEmailInput"),
+                    c = _doc[$getElementById]("contactNameLbl"),
+                    g = _doc[$getElementById]("contactNameInput"),
+                    p = _doc[$getElementById]("contactTopicLbl"),
+                    h = _doc[$getElementById]("contactTopicInput"),
+                    u = _doc[$getElementById]("contactMsgLbl"),
+                    v = _doc[$getElementById]("contactMsgInput"),
+                    m = _doc[$getElementById]("contactMsgCount"),
+                    w = _doc[$getElementById]("contactSecLbl"),
+                    f = _doc[$getElementById]("contactSecInput"),
+                    E = _doc[$getElementById]("contactSecCvs"),
+                    A = _doc[$getElementById]("contactSubmitBtn"),
+                    S = _doc[$getElementById]("contactSendErr"),
+                    b = L(),
+                    o(),
+                    l.oninput = g.oninput = h.oninput = v.oninput = f.oninput = i,
+                    v.addEventListener("input", o),
+                    r.onsubmit = n)
+                }, null)
+            }
+            )()
+        </script>
+        <script async src="launcher.js?v=1.1"></script>
+        <style>
+            * {
+                overflow: hidden;
+                position: relative;
+                box-sizing: border-box;
+                padding: 0;
+                margin: 0;
+                border: none;
+                -webkit-tap-highlight-color: transparent;
+                -webkit-tap-highlight-color: transparent
+            }
+
+            html {
+                min-width: 240px;
+                font-family: Folks;
+                color: #464646;
+                background: #fafafa
+            }
+
+            a {
+                text-decoration: none;
+                color: #1195e5
+            }
+
+            a:hover {
+                text-decoration: underline
+            }
+
+            h1 {
+                font-weight: 400;
+                color: #e53e3e
+            }
+
+            svg.defs {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 0;
+                height: 0;
+                z-index: 0;
+                float: left;
+                overflow: hidden;
+                pointer-events: none
+            }
+
+            html.ie {
+                width: 100%;
+                overflow-x: hidden
+            }
+
+            @media(max-width: 240px) {
+                html.ie {
+                    width:100%;
+                    overflow: scroll
+                }
+
+                html.ie body {
+                    width: 240px;
+                    overflow-x: hidden
+                }
+            }
+
+            #cookiescript_injected {
+                opacity: 1;
+                pointer-events: auto;
+                transition: opacity .3s
+            }
+
+            html.hideCMP #cookiescript_injected {
+                opacity: 0!important;
+                pointer-events: none!important;
+                transition: none!important
+            }
+
+            @font-face {
+                font-family: Folks;
+                src: url(Folks-Normal.woff2) format('woff2'),url(Folks-Normal.ttf) format('truetype');
+                font-weight: 400;
+                font-style: normal;
+                font-display: block
+            }
+
+            @font-face {
+                font-family: Folks;
+                src: url(Folks-Bold.woff2) format('woff2'),url(Folks-Bold.ttf) format('truetype');
+                font-weight: 700;
+                font-style: normal;
+                font-display: block
+            }
+
+            #page::after,#page::before {
+                content: "";
+                position: fixed;
+                left: 0;
+                width: 100%;
+                box-shadow: 0 0 4px 1px rgba(0,0,0,.1);
+                z-index: 1001;
+                pointer-events: none
+            }
+
+            #page::after {
+                bottom: 0
+            }
+
+            #background {
+                position: absolute;
+                width: 100%;
+                height: 100%
+            }
+
+            #header {
+                height: 72px;
+                cursor: default;
+                z-index: 500
+            }
+
+            #header nav {
+                font-size: 18px;
+                margin: 0 18px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-weight: 700
+            }
+
+            #header nav a {
+                color: #464646;
+                margin: 0 6px;
+                cursor: pointer
+            }
+
+            #header nav a:hover,#menuBtn:hover svg {
+                color: #ff6a00;
+                text-decoration: none
+            }
+
+            #header nav a.active::after {
+                content: "";
+                position: absolute;
+                left: 25%;
+                bottom: -3px;
+                width: 50%;
+                border-bottom: 1px solid
+            }
+
+            #header .logo {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                height: 100%;
+                transform: translate(-50%,-50%);
+                cursor: pointer
+            }
+
+            #header .logo svg {
+                top: 2px;
+                height: 92%;
+                transition-duration: .1s
+            }
+
+            #header .logo svg:hover {
+                transform: scale(1.05)
+            }
+
+            #feature {
+                overflow: hidden
+            }
+
+            #feature>.bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                filter: grayscale(30%) brightness(90%)
+            }
+
+            #feature>.content {
+                height: calc(100vh);
+                margin: auto;
+                box-shadow: 0 0 60px rgba(0,0,0,.5),0 0 0 4px rgba(0,0,0,.05)
+            }
+
+            #fold {
+                overflow: hidden
+            }
+
+            #fold>.content {
+                height: calc(100vw);
+                max-height: calc(100vh - 220px - 72px);
+                min-height: 240px;
+                width: 100%;
+                max-width: calc(100vh - 220px - 72px);
+                min-width: 240px;
+                margin: auto
+            }
+
+            #feature.inset>.content,#fold.inset>.content {
+                margin-bottom: 3px
+            }
+
+            #feature.inset::after,#feature.inset::before,#fold.inset::after,#fold.inset::before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 3px;
+                pointer-events: none;
+                background: #fafafa
+            }
+
+            #feature.inset::after,#fold.inset::after {
+                bottom: -69px;
+                left: -20px;
+                width: calc(100% + 40px);
+                height: 72px;
+                box-shadow: 0 -15px 15px -15px rgba(0,0,0,.3)
+            }
+
+            #menuBtn {
+                position: absolute;
+                width: 52px;
+                height: 100%;
+                cursor: pointer;
+                display: none
+            }
+
+            #menuBtn svg {
+                width: 20px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                stroke: currentColor;
+                stroke-linecap: square
+            }
+
+            #middle {
+                min-height: calc(100vh - 72px - 321px)
+            }
+
+            #content {
+                background: #f7f4ef;
+                border-radius: 16px 16px 0 0;
+                margin-top: 32px;
+                box-shadow: 0 2px 14px 0 rgba(0,0,0,.2);
+                padding-bottom: 32px;
+                min-height: calc(100vh - 72px - 321px)
+            }
+
+            #footer,#footer a {
+                color: #fff
+            }
+
+            #footer .arc {
+                position: absolute;
+                width: 100%;
+                height: 60px;
+                transform: translateY(-100%);
+                overflow: hidden
+            }
+
+            #footer .arc svg {
+                fill: #464646;
+                top: -1px;
+                left: -1px;
+                width: calc(100% + 2px);
+                height: calc(100% + 2px)
+            }
+
+            #footer .upper {
+                min-height: 246px;
+                background: #464646
+            }
+
+            #footer .col {
+                width: 33.33%;
+                padding: 38px 24px 30px
+            }
+
+            #footer .info {
+                padding-top: 8px
+            }
+
+            #footer nav {
+                display: inline-block;
+                text-align: left
+            }
+
+            #footer nav div {
+                margin-bottom: 16px
+            }
+
+            #footer nav .spacer {
+                display: none;
+                color: #ccc;
+                cursor: default;
+                font-weight: 400
+            }
+
+            #footer nav .break {
+                display: none;
+                margin-bottom: 16px
+            }
+
+            #footer .social svg {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                transform: translateY(1px);
+                margin-right: 8px;
+                fill: #fff
+            }
+
+            #footer .sub-col::before {
+                content: "";
+                position: absolute;
+                top: 50px;
+                left: 0;
+                height: 150px;
+                border: solid #ccc;
+                border-width: 0 1px 0 0
+            }
+
+            #footer .lower {
+                min-height: 75px;
+                background: #363636
+            }
+
+            .cont-sm {
+                width: 1000px
+            }
+
+            .cont-md {
+                width: 1320px
+            }
+
+            .cont-lg {
+                width: 1440px
+            }
+
+            .cont-xl {
+                width: 1600px
+            }
+
+            .cont-lg,.cont-md,.cont-sm,.cont-xl {
+                max-width: 100%;
+                margin: auto
+            }
+
+            .clr::after {
+                content: " ";
+                display: table;
+                clear: both
+            }
+
+            main,section {
+                padding: 64px
+            }
+
+            .grid {
+                overflow: hidden
+            }
+
+            [class*=row-] {
+                margin: 0 -15px
+            }
+
+            [class*=row-]::after {
+                content: "";
+                display: table;
+                clear: both
+            }
+
+            .col,[class*=clps-],[class*=col-] {
+                display: inline-block;
+                float: left;
+                min-height: 1px
+            }
+
+            [class*=clps-],[class*=col-] {
+                width: 100%;
+                padding: 0 15px
+            }
+
+            [class*=row-].tiles {
+                margin: -15px 15px
+            }
+
+            .tiles>[class*=clps-],.tiles>[class*=col-] {
+                padding: 15px
+            }
+
+            .col-1 {
+                max-width: 8.333333%
+            }
+
+            .col-2 {
+                max-width: 16.666667%
+            }
+
+            .col-3 {
+                max-width: 25%
+            }
+
+            .col-4 {
+                max-width: 33.333333%
+            }
+
+            .col-5 {
+                max-width: 41.666667%
+            }
+
+            .col-6 {
+                max-width: 50%
+            }
+
+            .col-7 {
+                max-width: 58.333333%
+            }
+
+            .col-8 {
+                max-width: 66.666667%
+            }
+
+            .col-9 {
+                max-width: 75%
+            }
+
+            .col-10 {
+                max-width: 83.333333%
+            }
+
+            .col-11 {
+                max-width: 91.666667%
+            }
+
+            .col-12 {
+                max-width: 100%
+            }
+
+            .clps-1 {
+                margin: 0 8.333333%
+            }
+
+            .clps-2 {
+                margin: 0 16.666667%
+            }
+
+            .clps-3 {
+                margin: 0 25%
+            }
+
+            .clps-4 {
+                margin: 0 33.333333%
+            }
+
+            .clps-5 {
+                margin: 0 41.666667%
+            }
+
+            .clps-6 {
+                margin: 0 50%
+            }
+
+            .clps-7 {
+                margin: 0 58.333333%
+            }
+
+            .clps-8 {
+                margin: 0 66.666667%
+            }
+
+            .clps-9 {
+                margin: 0 75%
+            }
+
+            .clps-10 {
+                margin: 0 83.333333%
+            }
+
+            .clps-11 {
+                margin: 0 91.666667%
+            }
+
+            .clps-12 {
+                margin: 0 100%
+            }
+
+            .b {
+                font-weight: 700
+            }
+
+            .txt-xs {
+                font-size: 12px;
+                line-height: normal
+            }
+
+            .txt-sm {
+                font-size: 14px;
+                line-height: 24px
+            }
+
+            .txt {
+                font-size: 16px;
+                line-height: 28px
+            }
+
+            .txt-md {
+                font-size: 20px;
+                line-height: 36px
+            }
+
+            .txt-lg {
+                font-size: 24px;
+                line-height: 36px
+            }
+
+            .txt-xs p,p.txt-xs {
+                margin-bottom: 12px
+            }
+
+            .txt p,.txt-sm p,p.txt,p.txt-sm {
+                margin-bottom: 20px
+            }
+
+            .txt-md p,p.txt-md {
+                margin-bottom: 24px
+            }
+
+            .txt-lg p,p.txt-lg {
+                margin-bottom: 32px
+            }
+
+            .txt h1,.txt-sm h1,.txt-xs h1,h1.txt,h1.txt-sm,h1.txt-xs {
+                font-size: 26px;
+                line-height: 32px;
+                margin-bottom: 8px
+            }
+
+            .txt-lg h1,.txt-md h1,h1.txt-lg,h1.txt-md {
+                font-size: 44px;
+                line-height: 52px;
+                margin-bottom: 24px
+            }
+
+            .txt-lg h2,.txt-md h2,.txt-sm h2,.txt-xs h2,h2.txt-lg,h2.txt-md,h2.txt-sm,h2.txt-xs {
+                font-size: 16px;
+                line-height: 24px;
+                margin-bottom: 4px
+            }
+
+            .h1 {
+                font-weight: 400;
+                color: #e53e3e
+            }
+
+            .h1.txt,.h1.txt-xs,.txt .h1,.txt-sm .h1,.txt-xs .h1,h1.txt-sm {
+                font-size: 26px;
+                line-height: 32px;
+                margin-bottom: 8px
+            }
+
+            .h1.txt-lg,.h1.txt-md,.txt-lg .h1,.txt-md .h1 {
+                font-size: 44px;
+                line-height: 52px;
+                margin-bottom: 24px
+            }
+
+            .ta-l {
+                text-align: left
+            }
+
+            .ta-c {
+                text-align: center
+            }
+
+            .ta-j {
+                text-align: justify
+            }
+
+            ol,ul {
+                margin-left: 32px;
+                margin-bottom: 20px
+            }
+
+            li {
+                margin-bottom: 12px;
+                padding-left: 12px
+            }
+
+            .cc {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%)
+            }
+
+            .bg-bar {
+                background: #fafafa;
+                background: radial-gradient(circle at 50% 0,#fafafa,#fafafa 43%,rgba(250,250,250,.65))
+            }
+
+            .shdo-hi {
+                box-shadow: 0 0 15px 0 rgba(0,0,0,.3)
+            }
+
+            @media (max-width: 1400px) {
+                .cont-md #content {
+                    border-radius:0;
+                    margin-top: 0;
+                    box-shadow: 14px 0 14px -14px rgba(0,0,0,.2),-14px 0 14px -14px rgba(0,0,0,.2)
+                }
+            }
+
+            @media(max-width: 1320px) {
+                #header {
+                    height:calc(52px + 47.824 * (100vw / 1320 - .5818px))
+                }
+
+                #header nav {
+                    font-size: calc(12px + 14.3472 * (100vw / 1320 - .5818px))
+                }
+
+                #middle {
+                    min-height: calc(100vh - (52px + 47.824 * (100vw / 1320 - .5818px)) - 321px)
+                }
+
+                #feature>.content {
+                    height: calc(100vh);
+                    max-width: calc(1.25 * 100vh - (52px + 47.824 * (100vw / 1320 - .5818px)) * 2)
+                }
+
+                #content {
+                    min-height: calc(100vh - (26px + 46 * 100vw / 1320) - 321px)
+                }
+
+                .cont-md #content {
+                    box-shadow: none
+                }
+            }
+
+            @media (max-width: 1199px) {
+                [class*=row-xl]>[class*=col-] {
+                    max-width:100%
+                }
+
+                [class*=row-xl]>[class*=clps-] {
+                    margin: 0
+                }
+            }
+
+            @media (max-width: 1080px) {
+                .cont-sm #content {
+                    border-radius:0;
+                    margin-top: 0;
+                    box-shadow: 14px 0 14px -14px rgba(0,0,0,.2),-14px 0 14px -14px rgba(0,0,0,.2)
+                }
+            }
+
+            @media (max-width: 1000px) {
+                .cont-sm #content {
+                    box-shadow:none
+                }
+            }
+
+            @media (max-width: 991px) {
+                [class*=row-lg]>[class*=col-] {
+                    max-width:100%
+                }
+
+                [class*=row-lg]>[class*=clps-] {
+                    margin: 0
+                }
+
+                #header nav {
+                    display: none;
+                    font-size: 12px
+                }
+
+                #menuBtn {
+                    display: block
+                }
+            }
+
+            @media(max-width: 768px) {
+                #header {
+                    height:52px
+                }
+
+                #middle {
+                    min-height: calc(100vh - 52px - 321px)
+                }
+
+                #feature>.content {
+                    height: calc(100vh - 52px * 2);
+                    max-width: calc(1.25 * 100vh - 52px * 2)
+                }
+
+                #content {
+                    min-height: calc(100vh - 52px - 321px)
+                }
+
+                #footer .info,#footer .links {
+                    width: 50%
+                }
+
+                #footer .social {
+                    width: 100%;
+                    padding: 30px 12px
+                }
+
+                #footer .social::before {
+                    top: 0;
+                    left: 30%;
+                    width: 40%;
+                    border-width: 1px 0 0
+                }
+
+                #footer .social nav {
+                    text-align: center
+                }
+
+                #footer .social div {
+                    display: inline-block;
+                    margin: 0
+                }
+
+                #footer .social .spacer {
+                    display: inline-block
+                }
+
+                #footer .social .break {
+                    display: block
+                }
+
+                main,section {
+                    padding: 64px calc(16px + 82.2904 * (100vw / 768 - .4167px))
+                }
+            }
+
+            @media (max-width: 575px) {
+                [class*=row-sm]>[class*=col-] {
+                    max-width:100%
+                }
+
+                [class*=row-sm]>[class*=clps-] {
+                    margin: 0
+                }
+            }
+
+            @media(max-width: 512px) {
+                #footer .info {
+                    width:100%;
+                    text-align: center;
+                    margin-top: 24px
+                }
+
+                #footer .links {
+                    width: 100%
+                }
+
+                #footer .sub-col {
+                    padding: 30px 12px
+                }
+
+                #footer .sub-col::before {
+                    top: 0;
+                    left: 30%;
+                    width: 40%;
+                    border-width: 1px 0 0
+                }
+
+                #footer .links nav {
+                    text-align: center
+                }
+
+                #footer .links div {
+                    display: inline-block;
+                    margin: 0
+                }
+
+                #footer .links .spacer {
+                    display: inline-block
+                }
+
+                #footer .links .break {
+                    display: block;
+                    height: 12px
+                }
+            }
+
+            @media (max-width: 400px) {
+                #footer .sub-col div {
+                    display:block;
+                    margin-bottom: 16px
+                }
+
+                #footer .sub-col .break,#footer .sub-col .spacer {
+                    display: none
+                }
+            }
+
+            @media(max-width: 319px) {
+                #header .logo {
+                    left:100%;
+                    height: 80%;
+                    transform: translate(-100%,-50%)
+                }
+
+                main,section {
+                    padding: 64px 16px
+                }
+            }
+
+            .mt-0 {
+                margin-top: 0!important
+            }
+
+            .mr-0 {
+                margin-right: 0!important
+            }
+
+            .mb-0 {
+                margin-bottom: 0!important
+            }
+
+            .ml-0 {
+                margin-left: 0!important
+            }
+
+            .pt-0 {
+                padding-top: 0!important
+            }
+
+            .pr-0 {
+                padding-right: 0!important
+            }
+
+            .pb-0 {
+                padding-bottom: 0!important
+            }
+
+            .pl-0 {
+                padding-left: 0!important
+            }
+
+            .btn {
+                color: #fff;
+                border-bottom: 3px solid;
+                box-shadow: 0 3px 3px 0 rgba(0,0,0,.4);
+                cursor: pointer;
+                white-space: nowrap;
+                display: inline-block;
+                padding: 12px 60px;
+                font-weight: 700;
+                font-size: 24px;
+                transition: transform 50ms
+            }
+
+            .btn:hover {
+                transform: scale(1.05)
+            }
+
+            .btn.lg {
+                font-size: 44px
+            }
+
+            .btn.capsule {
+                border-radius: 1200px
+            }
+
+            .btn.green {
+                background: #00ce9b;
+                border-color: #009973
+            }
+
+            @media (max-width: 767px) {
+                [class*=row-md]>[class*=col-] {
+                    max-width:100%
+                }
+
+                [class*=row-md]>[class*=clps-] {
+                    margin: 0
+                }
+
+                .btn.lg {
+                    font-size: 32px
+                }
+            }
+
+            @media (max-width: 520px) {
+                .btn.lg {
+                    font-size:24px
+                }
+            }
+
+            @media (max-width: 410px) {
+                .btn {
+                    padding:12px 20px
+                }
+            }
+
+            .bgimg-wood {
+                background: url(wood.webp) #eadec8
+            }
+
+            .no-webp .bgimg-wood {
+                background: url(wood.png) #eadec8
+            }
+
+            #gt-alayer,#gt-app-window,#gt-canvas,#gt-game,#gt-launcher,#gt-pause,#gt-splash {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden
+            }
+
+            #gt-canvas {
+                outline: 0;
+                touch-action: pan-y;
+                -ms-touch-action: pan-y
+            }
+
+            #gt-launcher,#gt-launcher * {
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none
+            }
+
+            #gt-pause {
+                cursor: pointer;
+                background: rgba(0,0,0,.5)
+            }
+
+            #gt-pause>svg {
+                width: calc(100vh * .8);
+                height: calc(100vh * .8);
+                max-width: 80%;
+                max-height: 80%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%)
+            }
+
+            #gt-alayer {
+                visibility: hidden;
+                pointer-events: none;
+                display: none
+            }
+
+            html.gt-fs,html.gt-fs body {
+                -webkit-overflow-scrolling: auto;
+                overscroll-behavior: none;
+                height: 100%
+            }
+
+            html.gt-fs #page {
+                visibility: hidden
+            }
+
+            html.gt-fs #gt-app-window {
+                position: fixed;
+                z-index: 10000;
+                visibility: visible;
+                background: #000
+            }
+
+            html.gt-fs #gt-alayer {
+                display: block;
+                visibility: visible
+            }
+
+            #gt-splash {
+                background: #75bdd1;
+                background: linear-gradient(135deg,#93cede 0,#75bdd1 41%,#49a5bf 100%);
+                transform-origin: top center
+            }
+
+            #gt-splash * {
+                pointer-events: none
+            }
+
+            #gt-splash .logo {
+                position: absolute;
+                top: 40px;
+                left: 50%;
+                width: 90%;
+                height: calc(100% - 80px - 15%);
+                max-width: 1200px;
+                min-height: 20px;
+                transform: translateX(-50%)
+            }
+
+            #gt-splash .logo svg {
+                width: 100%;
+                height: 100%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%)
+            }
+
+            #gt-splash .status {
+                position: absolute;
+                bottom: 13px;
+                right: 10px;
+                text-align: right;
+                opacity: 0;
+                font-family: Arial,Helvetica,sans-serif;
+                font-weight: 700;
+                font-size: 12px;
+                color: #fff;
+                animation: 1s .2s infinite alternate splash-text-pulse,.5s ease-out .1s splash-text-to-on
+            }
+
+            #gt-splash .bar {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 6px;
+                width: 100%;
+                background: rgba(0,0,0,.2)
+            }
+
+            #gt-splash .bar .fill {
+                width: 0%;
+                height: 100%;
+                background: #fff
+            }
+
+            @keyframes splash-close {
+                0% {
+                    transform: scaleY(1)
+                }
+
+                10% {
+                    transform: scaleY(1.25)
+                }
+
+                100% {
+                    transform: scaleY(.2) translateY(-100%);
+                    display: none;
+                    visibility: hidden
+                }
+            }
+
+            @keyframes splash-text-pulse {
+                0% {
+                    opacity: .5
+                }
+
+                100% {
+                    opacity: 1
+                }
+            }
+
+            @keyframes splash-text-update {
+                0% {
+                    transform: translateY(10px)
+                }
+
+                50% {
+                    transform: translateY(-2px)
+                }
+
+                100% {
+                    transform: translateY(0)
+                }
+            }
+
+            @keyframes splash-text-to-off {
+                0% {
+                    right: 10px
+                }
+
+                100% {
+                    right: -150px
+                }
+            }
+
+            @keyframes splash-bar-to-off {
+                0% {
+                    bottom: 0
+                }
+
+                100% {
+                    bottom: -20px
+                }
+            }
+
+            #gt-cookies-banner {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                padding: 12px;
+                background-color: #222;
+                color: #fff;
+                box-shadow: 0 0 0 3px rgba(0,0,0,.15);
+                transform: translateY(100%);
+                visibility: hidden;
+                pointer-events: none
+            }
+
+            #gt-cookies-banner::after {
+                content: "";
+                display: table;
+                clear: both
+            }
+
+            #gt-cookies-banner .info {
+                width: 100%;
+                display: block;
+                float: left;
+                padding-right: 20px
+            }
+
+            #gt-cookies-banner.confirm .info {
+                width: 100%;
+                display: block;
+                float: none;
+                padding-right: 0
+            }
+
+            #gt-cookies-banner .decision {
+                width: 100%;
+                display: block;
+                float: left;
+                text-align: right;
+                padding-top: 16px
+            }
+
+            #gt-cookies-banner.confirm .decision {
+                display: none
+            }
+
+            #gt-cookies-banner .decision-confirm {
+                width: 100%;
+                text-align: right;
+                display: none
+            }
+
+            #gt-cookies-banner.confirm .decision-confirm {
+                display: block
+            }
+
+            #gt-cookies-banner p {
+                font-size: 12px
+            }
+
+            #gt-cookies-banner a {
+                text-decoration: underline;
+                color: inherit
+            }
+
+            #gt-cookies-banner span {
+                font-size: 18px;
+                font-weight: 700;
+                display: block
+            }
+
+            [id*=gt-cookies-banner-btn-] {
+                cursor: pointer;
+                display: inline-block;
+                width: 150px;
+                font-size: 24px;
+                color: #fff;
+                padding: 10px 20px;
+                text-transform: uppercase;
+                font-weight: 700;
+                text-align: center;
+                background-color: #2196f3;
+                border-bottom: 3px solid rgba(0,0,0,.15);
+                border-radius: 4px;
+                box-shadow: 0 3px 3px 0 rgba(0,0,0,.4);
+                white-space: nowrap
+            }
+
+            [id*=gt-cookies-banner-btn-]:hover {
+                transform: scale(1.02)
+            }
+
+            [id*=gt-cookies-banner-btn-reject] {
+                background-color: #f44336
+            }
+
+            #gt-cookies-banner-btn-reject {
+                width: 105px;
+                margin-right: 8px
+            }
+
+            #gt-cookies-banner-btn-reject2 {
+                background-color: red
+            }
+
+            #gt-cookies-banner .decision-confirm [id*=gt-cookies-banner-btn-] {
+                width: 260px;
+                margin: 8px;
+                display: inline-block
+            }
+
+            #gt-cookies-confirm {
+                display: none
+            }
+
+            #gt-cookies-banner.confirm #gt-cookies-confirm {
+                display: block
+            }
+
+            #gt-cookies-banner.confirm #gt-cookies-intro {
+                display: none
+            }
+
+            @media(max-width: 800px) {
+                #gt-cookies-banner .decision,#gt-cookies-banner .info {
+                    display:block;
+                    float: none;
+                    width: auto;
+                    padding: 0
+                }
+
+                #gt-cookies-banner .info {
+                    padding-bottom: 8px
+                }
+            }
+
+            @media(max-width: 450px) {
+                [id*=gt-cookies-banner-btn-] {
+                    margin:0;
+                    width: auto!important;
+                    display: block
+                }
+
+                #gt-cookies-banner-btn-reject {
+                    margin-bottom: 16px;
+                    margin-right: 0
+                }
+            }
+
+            #gt-cookies-banner.confirm #gt-cookies-banner-btn-reject {
+                background-color: red
+            }
+
+            #gt-cookies-banner.on {
+                transform: translateY(0);
+                visibility: visible;
+                pointer-events: all;
+                transition: transform .2s ease-out
+            }
+
+            .w120 {
+                width: 120px
+            }
+
+            .w160 {
+                width: 160px
+            }
+
+            .w320 {
+                width: 320px
+            }
+
+            .w336 {
+                width: 336px
+            }
+
+            .w468 {
+                width: 468px
+            }
+
+            .w728 {
+                width: 728px
+            }
+
+            .h60 {
+                height: 60px
+            }
+
+            .h90 {
+                height: 90px
+            }
+
+            .h120 {
+                height: 120px
+            }
+
+            .h180 {
+                height: 180px
+            }
+
+            .h250 {
+                height: 250px
+            }
+
+            .h480 {
+                height: 480px
+            }
+
+            .h600 {
+                height: 600px
+            }
+
+            .aspace {
+                position: absolute;
+                display: none;
+                pointer-events: auto;
+                overflow: hidden
+            }
+
+            .aset,.aspace .aslot {
+                display: none
+            }
+
+            .aspace.rail {
+                top: 0;
+                height: 100%
+            }
+
+            .aspace.rail.l {
+                left: 0
+            }
+
+            .aspace.rail.r {
+                right: 0
+            }
+
+            .aspace.rail .aset {
+                top: 50%;
+                transform: translateY(-50%)
+            }
+
+            .aspace.rail .aslot {
+                width: 100%;
+                margin-top: 10px
+            }
+
+            .aspace.rail .aslot>div {
+                top: 50%;
+                transform: translateY(-50%)
+            }
+
+            .aspace.rail.l .aslot>div {
+                text-align: right
+            }
+
+            .aspace.rail.l .aslot>div>* {
+                text-align: initial
+            }
+
+            @media (orientation: landscape) and (min-width:520px) and (min-height:60px) {
+                .aspace.rail {
+                    display:block
+                }
+            }
+
+            @media (orientation: landscape) and (min-width:520px) and (max-width:679px) and (min-height:60px) {
+                .aspace.rail .aset.w120 {
+                    display:block
+                }
+
+                html.gt-fs #gt-game {
+                    width: calc(100% - 130px * 2);
+                    left: 130px
+                }
+            }
+
+            @media (orientation: landscape) and (min-width:680px) and (max-width:1319px) and (min-height:60px) {
+                .aspace.rail .aset.w160 {
+                    display:block
+                }
+
+                html.gt-fs #gt-game {
+                    width: calc(100% - 170px * 2);
+                    left: 170px
+                }
+            }
+
+            @media (orientation: landscape) and (min-width:1320px) and (max-width:1383px) and (min-height:60px) {
+                .aspace.rail .aset.w320 {
+                    display:block
+                }
+
+                html.gt-fs #gt-game {
+                    width: calc(100% - 330px * 2);
+                    left: 330px
+                }
+            }
+
+            @media (orientation: landscape) and (min-width:1384px) and (min-height:60px) {
+                .aspace.rail .aset.w336 {
+                    display:block
+                }
+
+                html.gt-fs #gt-game {
+                    width: calc(100% - 346px * 2);
+                    left: 346px
+                }
+            }
+
+            @media (min-height: 60px) and (max-height:249px) {
+                .aspace.rail .h60.o1 {
+                    display:block;
+                    margin-top: 0
+                }
+            }
+
+            @media (min-height: 130px) and (max-height:249px) {
+                .aspace.rail .h60.o2 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 200px) and (max-height:249px) {
+                .aspace.rail .h60.o3 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 250px) and (max-height:479px) {
+                .aspace.rail .h250 {
+                    display:block;
+                    margin-top: 0
+                }
+            }
+
+            @media (min-height: 320px) and (max-height:479px) {
+                .aspace.rail .h60.o1 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 390px) and (max-height:479px) {
+                .aspace.rail .h60.o2 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 460px) and (max-height:479px) {
+                .aspace.rail .h60.o3 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 480px) and (max-height:599px) {
+                .aspace.rail .h480 {
+                    display:block;
+                    margin-top: 0
+                }
+            }
+
+            @media (min-height: 550px) and (max-height:599px) {
+                .aspace.rail .h60.o1 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 600px) {
+                .aspace.rail .h600 {
+                    display:block;
+                    margin-top: 0
+                }
+            }
+
+            @media (min-height: 670px) and (max-height:859px) {
+                .aspace.rail .h60.o1 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 740px) and (max-height:859px) {
+                .aspace.rail .h60.o2 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 810px) and (max-height:859px) {
+                .aspace.rail .h60.o3 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 860px) and (max-height:1089px) {
+                .aspace.rail .h250 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 930px) and (max-height:1089px) {
+                .aspace.rail .h60.o1 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 1000px) and (max-height:1089px) {
+                .aspace.rail .h60.o2 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 1070px) and (max-height:1089px) {
+                .aspace.rail .h60.o3 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 1090px) {
+                .aspace.rail .h480 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 1160px) and (max-height:1349px) {
+                .aspace.rail .h60.o1 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 1230px) and (max-height:1349px) {
+                .aspace.rail .h60.o2 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 1300px) and (max-height:1349px) {
+                .aspace.rail .h60.o3 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 1350px) {
+                .aspace.rail .h250 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 1420px) {
+                .aspace.rail .h60.o1 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 1490px) {
+                .aspace.rail .h60.o2 {
+                    display:block
+                }
+            }
+
+            @media (min-height: 1560px) {
+                .aspace.rail .h60.o3 {
+                    display:block
+                }
+            }
+
+            .aspace.bar {
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                font-size: 0
+            }
+
+            .aspace.bar .aset {
+                left: 50%;
+                transform: translateX(-50%)
+            }
+
+            .aspace.bar .aslot {
+                height: 100%;
+                margin-left: 10px;
+                font-size: initial
+            }
+
+            @media (orientation: portrait) and (min-width:320px) and (min-height:320px) {
+                .aspace.bar {
+                    display:block
+                }
+            }
+
+            @media (orientation: portrait) and (min-height:320px) and (max-height:399px) and (min-width:320px) {
+                .aspace.bar .aset.h60 {
+                    display:inline-block
+                }
+
+                html.gt-fs #gt-game {
+                    max-height: calc(100% - 70px)
+                }
+            }
+
+            @media (orientation: portrait) and (min-height:400px) and (max-height:519px) and (min-width:320px) {
+                .aspace.bar .aset.h90 {
+                    display:inline-block
+                }
+
+                html.gt-fs #gt-game {
+                    max-height: calc(100% - 100px)
+                }
+            }
+
+            @media (orientation: portrait) and (min-height:520px) and (max-height:759px) and (min-width:320px) {
+                .aspace.bar .aset.h120 {
+                    display:inline-block
+                }
+
+                html.gt-fs #gt-game {
+                    max-height: calc(100% - 130px)
+                }
+            }
+
+            @media (orientation: portrait) and (min-height:760px) and (min-width:320px) {
+                .aspace.bar .aset.h180 {
+                    display:inline-block
+                }
+
+                html.gt-fs #gt-game {
+                    max-height: calc(100% - 190px)
+                }
+            }
+
+            @media (min-width: 320px) and (max-width:467px) {
+                .aspace.bar .w320 {
+                    display:inline-block;
+                    margin-left: 0
+                }
+            }
+
+            @media (min-width: 468px) and (max-width:727px) {
+                .aspace.bar .w468 {
+                    display:inline-block;
+                    margin-left: 0
+                }
+            }
+
+            @media (min-width: 728px) {
+                .aspace.bar .w728 {
+                    display:inline-block;
+                    margin-left: 0
+                }
+            }
+
+            @media (min-width: 1058px) and (max-width:1205px) {
+                .aspace.bar .w320 {
+                    display:inline-block
+                }
+            }
+
+            @media (min-width: 1206px) {
+                .aspace.bar .w468 {
+                    display:inline-block
+                }
+            }
+
+            @media (min-width: 1536px) {
+                .aspace.bar .w320 {
+                    display:inline-block
+                }
+            }
+
+            #gt-app-window>.bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                filter: grayscale(30%) brightness(90%);
+                visibility: hidden;
+                pointer-events: none
+            }
+
+            html.gt-fs #gt-app-window>.bg {
+                visibility: visible
+            }
+
+            html.gt-fs #gt-game {
+                box-shadow: 0 0 60px rgba(0,0,0,.5),0 0 0 4px rgba(0,0,0,.05)
+            }
+
+            #menu {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 800;
+                visibility: hidden;
+                transition: visibility
+            }
+
+            #menu .dimmer {
+                height: 100%;
+                background: rgba(0,0,0,.7);
+                cursor: pointer;
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity ease-out
+            }
+
+            #menu .drawer {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                max-width: 360px;
+                min-width: 240px;
+                width: calc(100% - 60px);
+                pointer-events: none;
+                transform: translateX(calc(-100% - 20px));
+                transition: transform cubic-bezier(.07,.5,.4,1.1)
+            }
+
+            #menu .drawer::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -20px;
+                width: calc(100% + 20px);
+                height: 100%;
+                background: #fafafa;
+                box-shadow: 0 0 10px 0 rgba(0,0,0,.7)
+            }
+
+            #menu,#menu .dimmer,#menu .drawer {
+                transition-duration: .25s
+            }
+
+            #menu .header {
+                height: 52px
+            }
+
+            #menu .close-btn {
+                width: 52px;
+                height: 100%;
+                cursor: pointer;
+                border-right: .5px solid #ddd
+            }
+
+            #menu .close-btn:hover {
+                color: #ff6a00
+            }
+
+            #menu .close-btn svg {
+                top: 50%;
+                left: 50%;
+                width: 20px;
+                fill: currentColor;
+                stroke: currentColor;
+                transform: translate(-50%,-50%)
+            }
+
+            #menu .logo {
+                position: absolute;
+                top: 50%;
+                left: 52px;
+                width: calc(100% - 53px);
+                height: 76%;
+                transform: translateY(-50%)
+            }
+
+            #menu .logo svg {
+                height: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                cursor: pointer
+            }
+
+            #menu nav {
+                border-top: .5px solid #ddd;
+                height: calc(100% - 53px);
+                overflow: auto;
+                overscroll-behavior: contain
+            }
+
+            #menu a {
+                color: inherit;
+                display: block;
+                width: 100%;
+                padding: 20px 0 20px 26px;
+                border-bottom: .5px solid #ddd;
+                text-decoration: none;
+                cursor: pointer
+            }
+
+            #menu a:hover {
+                color: #ff6a00
+            }
+
+            #menu a.active span::after {
+                content: "";
+                position: absolute;
+                left: 15%;
+                bottom: -3px;
+                width: 70%;
+                border-bottom: 1px solid
+            }
+
+            html.menu-open {
+                overflow-y: scroll;
+                height: 100vh
+            }
+
+            html.menu-open body {
+                height: 100%;
+                overflow-y: hidden
+            }
+
+            #menu.open {
+                visibility: visible
+            }
+
+            #menu.open .dimmer {
+                opacity: 1;
+                pointer-events: all
+            }
+
+            #menu.open .drawer {
+                transform: translateX(0);
+                pointer-events: all
+            }
+
+            #modal {
+                position: fixed;
+                z-index: 9000;
+                visibility: hidden;
+                opacity: 0;
+                transition-duration: .2s;
+                pointer-events: none!important
+            }
+
+            #modal,#modal .dimmer {
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%
+            }
+
+            #modal .dimmer {
+                position: absolute;
+                background: rgba(0,0,0,.3);
+                cursor: default;
+                pointer-events: all
+            }
+
+            #modal.dismissable .dimmer {
+                cursor: pointer
+            }
+
+            #modal .modal-contents {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transform: scale(.8);
+                transition-duration: .1s;
+                transition-timing-function: ease-in;
+                pointer-events: none
+            }
+
+            #modal .modal-panel {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                background: #fafafa;
+                border-radius: 8px;
+                border-bottom: 3px solid silver;
+                box-shadow: 0 2px 8px rgba(12,9,9,.3);
+                font-family: Arial,Helvetica,sans-serif;
+                max-width: 70%;
+                min-width: 236px;
+                text-align: center;
+                font-size: 16px;
+                overflow: hidden;
+                pointer-events: all
+            }
+
+            #modal .modal-text {
+                padding: 24px 24px 32px
+            }
+
+            #modal .modal-text h2 {
+                font-weight: 700;
+                color: #e53e3e;
+                font-size: 24px;
+                margin-bottom: 20px
+            }
+
+            #modal .modal-btn {
+                font-weight: 700;
+                cursor: pointer;
+                padding: 20px 24px;
+                border-top: 2px solid #ddd;
+                transition: .1s;
+                transition-property: background
+            }
+
+            #modal .modal-btn:hover {
+                background: #fff
+            }
+
+            .modal-open #modal {
+                visibility: visible;
+                opacity: 1;
+                pointer-events: all
+            }
+
+            .modal-open #modal .modal-contents {
+                transform: scale(1);
+                transition-duration: .2s;
+                transition-timing-function: ease-out
+            }
+
+            .rules p {
+                text-align: justify
+            }
+
+            .details .h1,.details h1 {
+                margin-bottom: 0
+            }
+
+            .details h3 {
+                font-size: 16px;
+                line-height: 24px;
+                margin-bottom: 8px;
+                margin-top: 12px;
+                border-bottom: 1px dotted #ddd
+            }
+        </style>
+    </head>
+    <body>
+        <svg class="defs">
+            <defs>
+                <pattern id="pattern:stripe" x="0" y="0" width="720" height="416" patternUnits="userSpaceOnUse">
+                    <rect x="0" y="0" width="720" height="416" fill="#F2F1F1"></rect>
+                    <g fill="#EDECEC" stroke="#ECE9E8" stroke-width="8" transform="rotate(-30 1000 60)">
+                        <rect x="-686" y="-348" width="2000" height="120"></rect>
+                        <rect x="-506" y="12.25" width="2000" height="120"></rect>
+                    </g>
+                </pattern>
+                <symbol id="patterns:stripe">
+                    <rect fill="url(#pattern:stripe)" x="0" y="0" width="100%" height="100%"></rect>
+                </symbol>
+                <symbol id="icons:menu" stroke-width="30">
+                    <path d="M 16 40 H 184 M 16 100 H 184 M 16 160 H 184"></path>
+                </symbol>
+                <symbol id="logos:gametable">
+                    <g fill="#52BFD3">
+                        <g id="logos:gametable.game">
+                            <path d="M 117.4 73.25 Q 115.75 73.25 115.75 80.65 115.75 84 114.95 84 114.4 84 112.9 81.95 105.55 71.95 91.6 71.95 74.15 71.95 63.3 84.05 53 95.7 53 113.35 53 130.9 63.8 142.9 74.95 155.35 92.3 155.35 107.05 155.35 116.55 146.5 L 116.55 152.7 Q 116.55 158.75 108.55 162.7 102.05 166 95.35 166 83.25 166 69.05 159 68.45 158.75 68.05 158.6 66.65 158.6 66 161.2 62 177.55 62 179.3 62 183.55 79.1 186.7 92.55 189.2 100.25 189.2 126.85 189.2 138.35 177.5 149.4 166 149.4 139.7 149.4 135.9 149.35 128.35 149.2 120.75 149.2 116.95 149.2 110.6 149.7 97.95 150.05 85.25 150.05 78.95 150.05 77.05 148.45 76.5 147.9 76.35 133.45 74.85 118.9 73.25 117.4 73.25 M 117.4 114.1 Q 117.4 120.85 113 125.8 108.5 130.85 101.75 130.85 95.2 130.85 90.65 125.95 86 121 86 114.3 86 107.55 90.6 102.6 95 97.5 101.75 97.5 108.5 97.5 113 102.45 117.4 107.35 117.4 114.1 M 258.85 82.1 Q 259.1 80.6 259.1 80.25 259.1 79.3 257.7 78.75 253.75 77.45 244.65 75.55 235 73.65 231.55 73.65 230.1 73.65 229.1 78.15 227.95 82.6 227.15 82.6 226.9 82.6 226.5 82.1 218.1 71.95 203.6 71.95 182.75 71.95 170.75 85.5 159.15 98.5 159.15 119.85 159.15 138.3 170.35 151.6 182.15 165.85 200.2 165.85 212 165.85 222.35 155.35 223.55 154.2 224.3 153.85 225.15 153.9 225.8 159.25 226.3 164.55 228.1 164.55 242.85 164.55 254.35 163.7 257.55 163.4 257.55 159.75 257.55 152.7 256.7 138.7 255.85 124.65 255.85 117.55 255.85 98.85 258.85 82.1 M 226.15 118.05 Q 226.15 126.05 221.15 131.2 216.15 136.25 208.3 136.25 200.9 136.25 195.75 130.9 190.55 125.55 190.55 118.05 190.55 110.15 195.45 105.05 200.35 100 208.3 100 216.25 100 221.25 105.1 226.15 110.2 226.15 118.05 M 419.5 95.85 Q 419.5 84 410.8 77.65 403.15 71.95 390.95 71.95 382.8 71.95 374.2 76.5 365.65 81.05 360.75 87.7 358.5 80 351.05 75.8 344.35 71.95 335.9 71.95 327.6 71.95 320.5 75.4 315.65 77.8 307.35 84.25 306.2 85.2 305.25 85.55 304.6 85.55 304.45 79.15 304.4 72.7 302.65 72.7 299.85 72.7 295.35 74 289 75.8 288.05 75.95 286.75 76.15 279.8 76.8 274.2 77.35 272.2 78.15 270.9 78.75 270.9 80.3 270.9 80.8 271.05 81.95 273.25 100.9 273.25 116.05 273.25 123.45 273.2 138.2 273.05 152.9 273.05 160.3 273.05 162.6 273.55 163.05 273.9 163.55 276.15 163.7 283.55 164.25 289.35 164.25 298.3 164.25 302.45 163.9 304.75 163.7 305.3 163.15 305.9 162.6 305.9 160.3 305.9 152 305.75 135.25 305.7 118.55 305.7 110.15 305.7 106.35 310.85 102.95 315.6 99.8 319.65 99.8 329.7 99.8 329.7 113 329.7 116.55 329.9 123.45 330.05 130.35 330.05 133.8 330.05 138.2 329.85 146.9 329.55 155.6 329.55 159.9 329.55 163.7 332.15 163.7 L 360.1 163.7 Q 362.75 163.7 362.75 160.65 362.75 156.2 362.5 147.45 362.2 138.6 362.2 134.25 362.2 115.4 362.6 111.5 363.05 107.05 367.35 103.45 371.6 99.8 376 99.8 385.85 99.8 386.4 110.8 386.8 117.6 386.8 133.8 386.8 138.05 386.5 146.5 386.25 154.95 386.25 159.15 386.25 163.15 389 163.7 391.8 164.25 403.05 164.25 413.95 164.25 416.75 163.9 419.5 163.55 419.5 160.3 419.5 154.5 419.2 142.85 418.9 131.05 418.9 125.3 418.9 120.35 419.2 110.6 419.5 100.7 419.5 95.85 M 511.85 141.35 Q 507.2 132.85 505.3 131.95 501.75 134.15 498.25 136.4 489.9 140.85 481.7 140.85 474.9 140.85 469.5 138.2 462.95 135.1 461.65 129.05 483.3 127.4 494.15 126.2 512.25 124.35 513.35 124.15 519.3 122.85 519.3 113.55 519.3 95.7 506.95 82.75 494.55 69.9 476.8 69.9 455.75 69.9 443 83.9 430.6 97.5 430.6 118.7 430.6 140.55 444.45 153.55 458 166.35 479.95 166.35 503.7 166.35 515 154.3 516.35 152.85 516.35 152.2 516.35 149.85 511.85 141.35 M 463.6 98.4 Q 467.4 93.55 473.2 93.55 478.85 93.55 482.9 97.85 486.95 102.15 486.95 107.9 486.95 108.9 483.95 109.4 469.5 111.5 462.65 111.5 460.1 111.5 460.1 109 460.1 102.95 463.6 98.4 Z"></path>
+                        </g>
+                    </g>
+                    <g fill="#F39C12">
+                        <g id="logos:gametable.table">
+                            <path d="M 586.1 96.7 Q 586.05 92.45 586.05 90.3 586.05 88.15 586.45 83.9 586.95 79.65 586.95 77.5 586.95 76.15 584.9 76.15 581.6 76.15 575.05 76.4 568.5 76.7 565.25 76.7 562.55 76.7 562.55 72.2 562.55 68.4 563.2 60.9 563.75 53.4 563.75 49.75 563.75 48.3 561.45 48.15 551.95 47.05 547.2 46.4 545.2 46.25 539.95 45 535.3 43.85 532.85 43.85 530.75 43.85 530.75 54.65 L 531.1 66 Q 531.35 73.55 530.75 77.05 530.55 78.8 527.15 78.95 521.25 79.1 521.25 80.95 521.25 82.9 521.55 86.85 521.7 90.8 521.7 92.75 521.7 94.25 521.55 97.3 521.25 100.35 521.25 101.8 521.25 104.3 524.8 104.3 525.15 104.3 526 104.25 526.8 104.25 527.15 104.25 531.9 104.25 531.9 108.3 531.9 114.4 531.4 126.65 530.95 138.9 530.95 144.95 530.95 165.35 557.65 165.35 572.15 165.35 584.1 158.8 586.6 157.45 587.1 156.65 587.7 155.95 587.7 153.35 587.7 150.7 588.4 145 589.05 139.4 589.05 136.65 589.05 134.6 587.1 134.6 585.4 134.6 581.15 135.75 576.75 136.75 574.45 136.75 567.2 136.75 564.7 132.8 562.95 129.85 562.95 122.05 562.95 119.9 562.8 115.45 562.8 111.15 562.8 108.9 562.8 104.9 564.25 104.9 L 571.15 104.9 Q 573 104.9 577.35 105.05 581.65 105.1 583.5 105.1 586.2 105.1 586.2 103.25 586.2 101 586.1 96.7 M 677.95 75.55 Q 668.35 73.65 664.9 73.65 663.45 73.65 662.4 78.15 661.3 82.6 660.45 82.6 660.25 82.6 659.8 82.1 651.45 71.95 636.95 71.95 616.1 71.95 604.05 85.5 592.5 98.5 592.5 119.85 592.5 138.3 603.65 151.6 615.5 165.85 633.5 165.85 645.35 165.85 655.7 155.35 656.85 154.2 657.65 153.85 658.45 153.9 659.1 159.25 659.65 164.55 661.4 164.55 676.2 164.55 687.65 163.7 690.85 163.4 690.85 159.75 690.85 152.7 690.05 138.7 689.2 124.65 689.2 117.55 689.2 98.85 692.15 82.1 692.45 80.6 692.45 80.25 692.45 79.3 691.05 78.75 687.1 77.45 677.95 75.55 M 659.45 118.05 Q 659.45 126.05 654.5 131.2 649.5 136.25 641.6 136.25 634.2 136.25 629.1 130.9 623.9 125.55 623.9 118.05 623.9 110.15 628.8 105.05 633.7 100 641.6 100 649.6 100 654.55 105.1 659.45 110.2 659.45 118.05 M 739.7 43.45 Q 740.1 37.55 740.1 33.95 740.1 30.85 738.4 30.85 732.2 30.85 722.3 31.8 708.25 33.1 706.25 33.15 703.4 33.35 703.4 34.85 L 703.45 35.9 Q 706.25 65.05 706.25 104.45 706.25 145.8 704.4 160.45 704.2 161.6 704.2 161.85 704.2 164 710 164 734.8 164 736.3 163.55 737.45 163.15 738.25 159.75 739.05 156.3 739.95 156.3 740.4 156.3 741.05 156.85 749.55 164.85 763.4 164.85 782.45 164.85 794.25 150.95 805.35 137.95 805.35 118.55 805.35 97.75 794.8 85 783.45 71.25 763.2 71.25 749.75 71.25 741.4 80.1 740.75 80.8 740.05 80.8 738.55 80.8 738.55 78 738.55 62.2 739.05 53.05 739.1 50.75 739.7 43.45 M 767.6 130.65 Q 762.9 136.1 755.1 136.1 747.15 136.1 742.55 130.85 738.2 125.8 738.2 117.7 738.2 109.85 742.7 104.6 747.15 99.2 754.9 99.2 762.5 99.2 767.2 104.6 771.9 109.85 771.9 117.55 771.9 125.55 767.6 130.65 M 850.25 37.55 L 850.35 35.9 Q 850.55 33.95 848.25 33.95 L 815.25 33.95 Q 812.8 33.95 812.8 35.95 812.8 36.5 813.05 37.55 815.05 52.3 815.35 72.55 815.25 70.4 815.25 108.05 815.25 116.25 815.05 132.65 814.9 149.05 814.9 157.25 814.9 160.95 814.9 161.2 815.15 163.25 817.2 163.7 820.2 164.45 831.3 164.45 842.15 164.45 846.3 163.7 848.6 163.35 848.6 161.4 848.6 158.8 848.3 154.15 848.05 148.95 848.05 146.8 847.9 133.3 847.9 108.05 847.9 77.45 850.25 37.55 M 934.65 82.75 Q 922.25 69.9 904.5 69.9 883.45 69.9 870.7 83.9 858.35 97.5 858.35 118.7 858.35 140.55 872.15 153.55 885.7 166.35 907.65 166.35 931.4 166.35 942.7 154.3 944.05 152.85 944.05 152.2 944.05 149.85 939.55 141.35 934.9 132.85 933 131.95 929.45 134.15 925.95 136.4 917.65 140.85 909.4 140.85 902.6 140.85 897.25 138.2 890.7 135.1 889.4 129.05 911 127.4 921.9 126.2 940 124.35 941.05 124.15 947 122.85 947 113.55 947 95.7 934.65 82.75 M 891.35 98.4 Q 895.1 93.55 900.9 93.55 906.6 93.55 910.6 97.85 914.7 102.15 914.7 107.9 914.7 108.9 911.65 109.4 897.25 111.5 890.4 111.5 887.85 111.5 887.85 109 887.85 102.95 891.35 98.4 Z"></path>
+                        </g>
+                    </g>
+                </symbol>
+                <symbol id="logos:gametable-stroked" stroke-linejoin="round">
+                    <g fill="#fff">
+                        <circle cx="101" cy="114" r="20"></circle>
+                        <circle cx="208" cy="118" r="22"></circle>
+                        <circle cx="473" cy="105" r="18"></circle>
+                        <circle cx="580" cy="118" r="22"></circle>
+                        <circle cx="640" cy="118" r="22"></circle>
+                        <circle cx="755" cy="118" r="22"></circle>
+                        <circle cx="900" cy="105" r="18"></circle>
+                    </g>
+                    <g fill="none" stroke="#fff" stroke-width="26">
+                        <use xlink:href="#logos:gametable.game"></use>
+                        <use xlink:href="#logos:gametable.table"></use>
+                    </g>
+                    <use xlink:href="#logos:gametable"></use>
+                </symbol>
+                <symbol id="shapes:arc-fill-bl">
+                    <path d="M 0 0 Q 20 100 100 100 V 100 H 0 L 0 0"></path>
+                </symbol>
+                <symbol id="icons:close" stroke-width="30">
+                    <path d="M 16 16 L 184 184 M 184 16 L 16 184"></path>
+                </symbol>
+            </defs>
+        </svg>
+        <div id="page">
+            <svg id="background">
+                <use xlink:href="#patterns:stripe"></use>
+            </svg>
+            <div id="middle">
+                <div id="feature" class="inset">
+                    <div class="bg bgimg-wood"></div>
+                    <div class="content">
+                        <div id="gt-launcher" bundlesrc="bundle.gtb?v=1.1" oncontextmenu="return!1">
+                            <div id="gt-app-window">
+                                <div class="bg bgimg-wood"></div>
+                                <div id="gt-game" oncontextmenu="return!1">
+                                    <canvas id="gt-canvas" tabindex="0"></canvas>
+                                </div>
+                                <div id="gt-pause">
+                                    <svg viewBox="0 0 240 240" fill="#fff" stroke="#fff">
+                                        <circle fill="none" stroke-width="16" cx="120" cy="100" r="90"></circle>
+                                        <polygon stroke-width="24" stroke-linejoin="round" points="96,60 164,100 96,140"></polygon>
+                                        <text x="120" y="226" style="font-family:Arial,Helvetica,sans-serif;font-size:26px;font-weight:700;text-anchor:middle" stroke="none">press here to play</text>
+                                    </svg>
+                                </div>
+                                <div id="gt-splash">
+                                    <div class="logo">
+                                        <svg viewBox="0 0 1000 220">
+                                            <use xlink:href="#logos:gametable-stroked"></use>
+                                        </svg>
+                                    </div>
+                                    <p class="status">Loading. Please Wait.</p>
+                                    <div class="bar">
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                                <div id="gt-alayer">
+                                    <div class="aspace rail l">
+                                        <div class="aset w120">
+                                            <div class="aslot h600">
+                                                <div id="gt-rail-l-120-600"></div>
+                                            </div>
+                                            <div class="aslot h480">
+                                                <div id="gt-rail-l-120-480"></div>
+                                            </div>
+                                            <div class="aslot h250">
+                                                <div id="gt-rail-l-120-250"></div>
+                                            </div>
+                                            <div class="aslot h60 o1">
+                                                <div id="gt-rail-l-120-60-o1"></div>
+                                            </div>
+                                            <div class="aslot h60 o2">
+                                                <div id="gt-rail-l-120-60-o2"></div>
+                                            </div>
+                                            <div class="aslot h60 o3">
+                                                <div id="gt-rail-l-120-60-o3"></div>
+                                            </div>
+                                        </div>
+                                        <div class="aset w160">
+                                            <div class="aslot h600">
+                                                <div id="gt-rail-l-160-600"></div>
+                                            </div>
+                                            <div class="aslot h480">
+                                                <div id="gt-rail-l-160-480"></div>
+                                            </div>
+                                            <div class="aslot h250">
+                                                <div id="gt-rail-l-160-250"></div>
+                                            </div>
+                                            <div class="aslot h60 o1">
+                                                <div id="gt-rail-l-160-60-o1"></div>
+                                            </div>
+                                            <div class="aslot h60 o2">
+                                                <div id="gt-rail-l-160-60-o2"></div>
+                                            </div>
+                                            <div class="aslot h60 o3">
+                                                <div id="gt-rail-l-160-60-o3"></div>
+                                            </div>
+                                        </div>
+                                        <div class="aset w320">
+                                            <div class="aslot h600">
+                                                <div id="gt-rail-l-320-600"></div>
+                                            </div>
+                                            <div class="aslot h480">
+                                                <div id="gt-rail-l-320-480"></div>
+                                            </div>
+                                            <div class="aslot h250">
+                                                <div id="gt-rail-l-320-250"></div>
+                                            </div>
+                                            <div class="aslot h60 o1">
+                                                <div id="gt-rail-l-320-60-o1"></div>
+                                            </div>
+                                            <div class="aslot h60 o2">
+                                                <div id="gt-rail-l-320-60-o2"></div>
+                                            </div>
+                                            <div class="aslot h60 o3">
+                                                <div id="gt-rail-l-320-60-o3"></div>
+                                            </div>
+                                        </div>
+                                        <div class="aset w336">
+                                            <div class="aslot h600">
+                                                <div id="gt-rail-l-336-600"></div>
+                                            </div>
+                                            <div class="aslot h480">
+                                                <div id="gt-rail-l-336-480"></div>
+                                            </div>
+                                            <div class="aslot h250">
+                                                <div id="gt-rail-l-336-250"></div>
+                                            </div>
+                                            <div class="aslot h60 o1">
+                                                <div id="gt-rail-l-336-60-o1"></div>
+                                            </div>
+                                            <div class="aslot h60 o2">
+                                                <div id="gt-rail-l-336-60-o2"></div>
+                                            </div>
+                                            <div class="aslot h60 o3">
+                                                <div id="gt-rail-l-336-60-o3"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="aspace rail r">
+                                        <div class="aset w120">
+                                            <div class="aslot h600">
+                                                <div id="gt-rail-r-120-600"></div>
+                                            </div>
+                                            <div class="aslot h480">
+                                                <div id="gt-rail-r-120-480"></div>
+                                            </div>
+                                            <div class="aslot h250">
+                                                <div id="gt-rail-r-120-250"></div>
+                                            </div>
+                                            <div class="aslot h60 o1">
+                                                <div id="gt-rail-r-120-60-o1"></div>
+                                            </div>
+                                            <div class="aslot h60 o2">
+                                                <div id="gt-rail-r-120-60-o2"></div>
+                                            </div>
+                                            <div class="aslot h60 o3">
+                                                <div id="gt-rail-r-120-60-o3"></div>
+                                            </div>
+                                        </div>
+                                        <div class="aset w160">
+                                            <div class="aslot h600">
+                                                <div id="gt-rail-r-160-600"></div>
+                                            </div>
+                                            <div class="aslot h480">
+                                                <div id="gt-rail-r-160-480"></div>
+                                            </div>
+                                            <div class="aslot h250">
+                                                <div id="gt-rail-r-160-250"></div>
+                                            </div>
+                                            <div class="aslot h60 o1">
+                                                <div id="gt-rail-r-160-60-o1"></div>
+                                            </div>
+                                            <div class="aslot h60 o2">
+                                                <div id="gt-rail-r-160-60-o2"></div>
+                                            </div>
+                                            <div class="aslot h60 o3">
+                                                <div id="gt-rail-r-160-60-o3"></div>
+                                            </div>
+                                        </div>
+                                        <div class="aset w320">
+                                            <div class="aslot h600">
+                                                <div id="gt-rail-r-320-600"></div>
+                                            </div>
+                                            <div class="aslot h480">
+                                                <div id="gt-rail-r-320-480"></div>
+                                            </div>
+                                            <div class="aslot h250">
+                                                <div id="gt-rail-r-320-250"></div>
+                                            </div>
+                                            <div class="aslot h60 o1">
+                                                <div id="gt-rail-r-320-60-o1"></div>
+                                            </div>
+                                            <div class="aslot h60 o2">
+                                                <div id="gt-rail-r-320-60-o2"></div>
+                                            </div>
+                                            <div class="aslot h60 o3">
+                                                <div id="gt-rail-r-320-60-o3"></div>
+                                            </div>
+                                        </div>
+                                        <div class="aset w336">
+                                            <div class="aslot h600">
+                                                <div id="gt-rail-r-336-600"></div>
+                                            </div>
+                                            <div class="aslot h480">
+                                                <div id="gt-rail-r-336-480"></div>
+                                            </div>
+                                            <div class="aslot h250">
+                                                <div id="gt-rail-r-336-250"></div>
+                                            </div>
+                                            <div class="aslot h60 o1">
+                                                <div id="gt-rail-r-336-60-o1"></div>
+                                            </div>
+                                            <div class="aslot h60 o2">
+                                                <div id="gt-rail-r-336-60-o2"></div>
+                                            </div>
+                                            <div class="aslot h60 o3">
+                                                <div id="gt-rail-r-336-60-o3"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="aspace bar b">
+                                        <div class="aset h60">
+                                            <div class="aslot w728">
+                                                <div id="gt-bar-b-728-60"></div>
+                                            </div>
+                                            <div class="aslot w468">
+                                                <div id="gt-bar-b-468-60"></div>
+                                            </div>
+                                            <div class="aslot w320">
+                                                <div id="gt-bar-b-320-60"></div>
+                                            </div>
+                                        </div>
+                                        <div class="aset h90">
+                                            <div class="aslot w728">
+                                                <div id="gt-bar-b-728-90"></div>
+                                            </div>
+                                            <div class="aslot w468">
+                                                <div id="gt-bar-b-468-90"></div>
+                                            </div>
+                                            <div class="aslot w320">
+                                                <div id="gt-bar-b-320-90"></div>
+                                            </div>
+                                        </div>
+                                        <div class="aset h120">
+                                            <div class="aslot w728">
+                                                <div id="gt-bar-b-728-120"></div>
+                                            </div>
+                                            <div class="aslot w468">
+                                                <div id="gt-bar-b-468-120"></div>
+                                            </div>
+                                            <div class="aslot w320">
+                                                <div id="gt-bar-b-320-120"></div>
+                                            </div>
+                                        </div>
+                                        <div class="aset h180">
+                                            <div class="aslot w728">
+                                                <div id="gt-bar-b-728-180"></div>
+                                            </div>
+                                            <div class="aslot w468">
+                                                <div id="gt-bar-b-468-180"></div>
+                                            </div>
+                                            <div class="aslot w320">
+                                                <div id="gt-bar-b-320-180"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </body>
+</html>
