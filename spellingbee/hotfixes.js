@@ -1,0 +1,1 @@
+window.sharing.shareViaEmail = (...a) => window.location.href = 'mailto:spellingbeemail@gmail.com';
