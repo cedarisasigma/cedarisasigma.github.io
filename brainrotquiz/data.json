@@ -110,5 +110,17 @@
     "27": {
         "img": "assets/gamberospero.jpg",
         "correct": "Gambero Spero"
+    },
+    "28": {
+        "img": "assets/nugget.jpg",
+        "correct": "Gedagedago Nugget"
+    },
+    "29": {
+        "img": "assets/smurfcat.jpg",
+        "correct": "Smurf Cat"
+    },
+    "30": {
+        "img": "assets/chillguy.jpg",
+        "correct": "Chill Guy"
     }
 }
