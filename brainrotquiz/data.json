@@ -70,5 +70,45 @@
     "17": {
         "img": "assets/chimp.jpeg",
         "correct": "Chimpanzini Bananini"
-    }    
+    }, 
+    "18": {
+        "img": "assets/elotino.png",
+        "correct": "Elotino Detectivo"
+    }, 
+    "19": {
+        "img": "assets/bananita.jpeg",
+        "correct": "Bananitta Dolfinitta"
+    }, 
+    "20": {
+        "img": "assets/frulli.webp",
+        "correct": "Frulli Frulla"
+    }, 
+    "21": {
+        "img": "assets/trulimero.jpeg",
+        "correct": "Trulimero Trulichina"
+    }, 
+    "22": {
+        "img": "assets/burbaloni.webp",
+        "correct": "Burbaloni Luliloli"
+    }, 
+    "23": {
+        "img": "assets/octopusini.jpeg",
+        "correct": "Bluberini Octopusini"
+    }, 
+    "24": {
+        "img": "assets/bobrito.jpg",
+        "correct": "Bobrito Bandito"
+    }, 
+    "25": {
+        "img": "assets/tracotucotulu.jpg",
+        "correct": "Tracotucotulu"
+    },
+    "26": {
+        "img": "assets/penisini.jpeg",
+        "correct": "Crocodildo Penisini"
+    },
+    "27": {
+        "img": "assets/gamberospero.jpg",
+        "correct": "Gambero Spero"
+    }
 }
