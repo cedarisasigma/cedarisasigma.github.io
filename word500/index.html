@@ -1,22 +1,181 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <link rel="icon" href="/favicon.ico"/>
-        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"/>
-        <meta name="theme-color" content="#000000"/>
-        <meta name="description" content="Mastermind / Wordle crossover"/>
-        <meta name="keywords" content="Woodle, Wordle, Mastermind, Codebreaker, Nerdle, Absurdle, Word Game, Wodle, Woodel, Letters, Game, woodle of the day, daily challenge, challenge">
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-        <link rel="manifest" href="/manifest.json"/>
-        <script defer="defer" data-domain="play.woodle.today" src="https://plausible.io/js/plausible.js"></script>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7256299683842240" crossorigin="anonymous"></script>
-        <title>WOODLE</title>
-        <script defer="defer" src="main.279c5fd4.js"></script>
-        <link href="main.b01c3204.css" rel="stylesheet">
-    </head>
-    <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root"></div>
-    </body>
+<head>
+	<meta charset="UTF-8">
+    <base href="https://word500.com/">
+	<meta name="viewport" content="width=device-width, initial-scale = 1.0">
+	<!-- <meta name="mobile-web-app-capable" content="yes"> -->
+	<meta name="description" content="Word500 is a word game for power players. Can you solve the daily puzzle?">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="green">
+	<meta name="apple-mobile-web-app-title" content="Word500">
+	<meta name="msapplication-TileImage" content="/images/icon_144.png">
+	<meta name="msapplication-TileColor" content="green">
+	<!-- Twitter Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta property="twitter:domain" content="word500.com">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="word500">
+	<meta property="og:description" content="Word500 is a word game for power players. Can you solve the daily puzzle?">
+	<meta property="og:image" content="https://word500.com/images/word500-image.png">
+	<meta property="og:image:width" content="532">
+	<meta property="og:image:height" content="263">
+	<link rel="manifest" href="manifest.json">
+	<link rel="shortcut icon" href="images/icon.png" type="image/png">
+	<link rel="shortcut icon" sizes="128x128" href="images/icon_128.png">
+	<link rel="shortcut icon" sizes="192x192" href="images/icon_192.png">
+	<link rel="apple-touch-icon" href="/images/icon_72.png" sizes="72x72">
+	<link rel="apple-touch-icon" href="/images/icon_96.png" sizes="96x96">
+	<link rel="apple-touch-icon" href="/images/icon_128.png" sizes="128x128">
+	<link rel="apple-touch-icon" href="/images/icon_144.png" sizes="144x144">
+	<link rel="apple-touch-icon" href="/images/icon_152.png" sizes="152x152">
+	<link rel="apple-touch-icon" href="/images/icon_192.png" sizes="192x192">
+	<link rel="apple-touch-icon" href="/images/icon_384.png" sizes="384x384">
+	<link rel="apple-touch-icon" href="/images/icon_512.png" sizes="512x512">	
+	<link rel="apple-touch-icon-precomposed" sizes="128x128" href="images/icon_128.png">
+	<link rel="stylesheet" href="style_220429.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700;900&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+	<title>Word500</title>
+	<!-- <script>
+		if(navigator.serviceWorker) {
+		navigator.serviceWorker.register('sw_refresh.js');
+		}
+	</script> -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-J03133WL41"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-J03133WL41');
+	</script>
+
+
+<script defer>
+(function(w, d) {
+w.adthrive = w.adthrive || {};
+w.adthrive.cmd = w.adthrive.cmd || [];
+w.adthrive.plugin = 'adthrive-ads-manual';
+w.adthrive.host = 'ads.adthrive.com';
+var s = d.createElement('script');
+s.async = true;
+s.referrerpolicy='no-referrer-when-downgrade';
+s.src = 'https://' + w.adthrive.host + '/sites/64c92309ee8c52778c62e5cc/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
+var n = d.getElementsByTagName('script')[0];
+n.parentNode.insertBefore(s, n);
+})(window, document);
+</script>
+
+</head>
+<body>
+  <div>
+    <div class="bg-[#0B0D12] relative overflow-hidden min-h-[100vh]">
+      <header class="border-0 border-b border-solid border-[#464646] flex justify-center">
+        <div class="max-w-[1024px] px-6 justify-between items-center flex h-[70px] w-full">
+					<div class="items-center flex text-sm">
+						<img class="header-iconstyle w-[38px] h-[38px]" src="logo.png" alt="Word500" />
+						<span class="text-sm ml-2">
+							Word500
+						</span>
+					</div>
+        <div class="flex">
+            <a class="cursor-pointer mr-2 md:hidden" href="/helpen">
+              <img src="help_outline.svg"></img>
+            </a>
+            <a class="cursor-pointer md:hidden" href="mailto:mythomasgames@gmail.com">
+              <img src="mail.svg"></img>
+            </a>
+            </div>
+            <div class="flex md:flex hidden">
+            <a class="cursor-pointer mr-12 md:block hidden text-sm" href="./helpen">
+              How to Play?
+            </a>
+            <a class="cursor-pointer md:block hidden text-sm" href="mailto:mythomasgames@gmail.com">Contact</a>
+            </div>
+	</div>
+      </header>
+      <div
+        class="h-[800px] absolute top-[120px] -right-[170px] md:block hidden"
+      >
+      </div>
+      <div
+        class="w-[700px] h-[700px] absolute top-[320px] -left-[300px] md:block hidden"
+      >
+      </div>
+      <div
+        class="w-full relative"
+      >
+        <div class="max-w-[550px] w-full px-6 py-10 m-auto flex flex-col items-center gap-3">
+          <div
+            class="w-full p-4 mt-2 border border-solid rounded-lg flex flex-col items-start gap-2 relative overflow-hidden"
+            style="
+              background: linear-gradient(141deg, rgba(8, 134, 92, 0.29) 0%, rgba(21, 24, 32, 0.60) 100%, rgba(18, 134, 8, 0.01) 100%);
+              border-color: rgba(0, 204, 136, 0.20);
+            ",
+          >
+            <img
+              class="absolute right-0 top-0 h-[100%]"
+              src="./daily.png"
+              alt=""
+            />
+            <div class="text-[#D0D0D0] text-sm relative">Play once daily</div>
+            <div class="text-white text-lg font-semibold relative">Daily Word500</div>
+            <a
+              class="w-[150px] h-[40px] rounded cursor-pointer text-sm font-semibold flex items-center justify-center mt-3 relative hover:bg-[#08865C] transition-all"
+              style="border: 1px solid rgba(0, 204, 136, 0.5);"
+              href="https://cedarisasigma.github.io/word500/game?mode=daily"
+            >
+              Play Now
+            </a>
+          </div>
+          <div
+            class="w-full p-4 mt-2 border border-solid rounded-lg flex flex-col items-start gap-2 relative overflow-hidden"
+            style="
+              background: linear-gradient(141deg, rgba(8, 134, 92, 0.29) 0%, rgba(21, 24, 32, 0.60) 100%, rgba(18, 134, 8, 0.01) 100%);
+              border-color: rgba(0, 204, 136, 0.20);
+            "
+          >
+            <img
+              class="absolute right-0 top-0 h-[100%]"
+              src="./practice.png"
+              alt=""
+            />
+            <div class="text-[#D0D0D0] text-sm relative">Play unlimited</div>
+            <div class="text-white text-lg font-semibold relative">Practice Word500</div>
+            <a
+              class="w-[150px] h-[40px] rounded cursor-pointer text-sm font-semibold flex items-center justify-center mt-3 relative hover:bg-[#08865C] transition-all"
+              style="border: 1px solid rgba(0, 204, 136, 0.5);"
+              href="https://cedarisasigma.github.io/word500/game?mode=practice"
+            >
+              Play Now
+            </a>
+          </div>
+        </div>
+
+        <footer class="pt-6 pb-6 ads">
+          <div class="flex flex-wrap justify-center">
+            <a
+              class="cursor-pointer tracking-wider text-sm leading-6"
+              href="/privacy"
+            >
+              Privacy Policy
+          	</a>
+          </div>
+	<script defer>!function(){"use strict";!function(e){if(-1===e.cookie.indexOf("__adblocker")){e.cookie="__adblocker=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";var t=new XMLHttpRequest;t.open("GET","https://www.npttech.com/advertising.js",!0),t.onreadystatechange=function(){if(XMLHttpRequest.DONE===t.readyState)if(200===t.status){var n=e.createElement("script");n.innerHTML=t.responseText,e.getElementsByTagName("head")[0].appendChild(n)}else{var a=new Date;a.setTime(a.getTime()+3e5),e.cookie="__adblocker=true; expires="+a.toUTCString()+"; path=/"}},t.send()}}(document)}();
+</script>
+
+<script defer>!function(){"use strict";var e;e=document,function(){var t,n;function r(){var t=e.createElement("script");t.src="https://cafemedia-com.videoplayerhub.com/galleryplayer.js",e.head.appendChild(t)}function a(){var t=e.cookie.match("(^|[^;]+)\\s*__adblocker\\s*=\\s*([^;]+)");return t&&t.pop()}function c(){clearInterval(n)}return{init:function(){var e;"true"===(t=a())?r():(e=0,n=setInterval((function(){100!==e&&"false"!==t||c(),"true"===t&&(r(),c()),t=a(),e++}),50))}}}().init()}();
+</script>
+        </footer>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
+
+
+<!-- :):(:) -->
