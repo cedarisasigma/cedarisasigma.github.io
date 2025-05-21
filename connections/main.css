@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: -apple-system,'Poppins', BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    margin: 0;
+	background: #fff;
+	color:#2e3239;
+}
+
+code {
+    font-family: 'Poppins', sans-serif,source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace
+}
+
+.game-container {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px
+}
+
+.footer {
+    box-sizing: border-box;
+    margin: 20px auto 0;
+    max-width: 100%; 
+    text-align: center;
+    width: 500px
+}
+
+.contact {
+    color: #888;
+    font-size: 14px;
+    margin-top: 30px;
+    max-width: 100%;
+    width: 600px
+}
+
+h1 {
+    text-align: center
+}
+
+.game-header h1 {
+    font-size: 3em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.game-header p {
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+}
+
+.message {
+    margin-bottom: 15px;
+    margin-top: 10px
+}
+
+.game-group {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    max-width: 600px
+}
+
+.group-name {
+    font-size: 1.2em;
+    font-weight: 700
+}
+
+.group-members {
+    font-size: 1em
+}
+
+.game-board {
+    grid-gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 1em;
+    width: 100%
+}
+
+.game-item {
+    align-items: center;
+    background-color: #79b851;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    font-weight: 900;
+    height: 70px;
+    justify-content: center;
+    min-width: calc(25vw - 15px);
+    text-transform: uppercase;
+    transition: background-color .3s ease;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.game-item.selected {
+    background-color: #5a594e;
+    color: #fff
+}
+
+.game-group {
+    background-color: #fbd400;
+    box-sizing: border-box;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+    width: 100%
+}
+
+.btn-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%
+}
+
+.game-btn {
+    background: #ebedf3;
+    border-radius: 25px;
+    color: #69758e;
+    cursor: pointer;
+    font-size: 1em;
+    height: 50px;
+    margin: .5em 0;
+    border: none;
+    width: 100%;
+    font-family:'Poppins', sans-serif;
+}
+.game-btn:hover{
+    color: #57ac57;
+    background: #e6f3e6;
+}
+.submit-btn {
+       background: #f3c237;
+    border: none;
+    color: #ffffff;
+}
+
+@media (min-width:600px) {
+    .game-board {
+        grid-template-columns: repeat(4, 1fr);
+        width: 600px
+    }
+    .game-item {
+        min-width: auto;
+        width: 140px
+    }
+    .btn-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 600px
+    }
+    .game-btn {
+        width: 160px
+    }
+}
+
+@media (max-width:600px) {
+    .game-header {
+        max-width: 100%
+    }
+    .game-container {
+        padding-left: 15px;
+        padding-right: 15px
+    }
+    .game-item {
+        font-size: 14px
+    }
+}
+
+.disclaimer {
+    color: #888;
+    font-size: 14px; 
+    max-width: 100%;
+    width: 600px
+}
+
+.congratulations {
+    background-color: #fff;
+    border-radius: 15px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: center
+}
+
+.congratulations h2 {
+    color: #0047ab;
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px
+}
+
+.congratulations p {
+    color: #0047ab;
+    font-size: 1.5em
+}
+
+@media only screen and (max-width:600px) {
+    .game-item.size-8 {
+        font-size: 13px
+    }
+    .game-item.size-more {
+        font-size: 12px
+    }
+}
+
+/*# sourceMappingURL=main.d36c6617.css.map*/
