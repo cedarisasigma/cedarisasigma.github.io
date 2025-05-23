@@ -1929,7 +1929,13 @@ Game.Launch=function()
 		Game.Loader.Load(['filler.png']);
 	}
 	Game.ErrorFrame=function()
-	{ return }
+	{
+		l('offGameMessage').innerHTML=
+		'<div class="title">Oops. Wrong address!</div>'+
+		'<div>It looks like you\'re accessing Cookie Clicker from another URL than the official one.<br>'+
+		'You can <a href="https://orteil.dashnet.org/cookieclicker/" target="_blank">play Cookie Clicker over here</a>!<br>'+
+		'<small>(If for any reason, you are unable to access the game on the official URL, we are currently working on a second domain.)</small></div>';
+	}
 	Game.timedout=false;
 	Game.Timeout=function()
 	{
