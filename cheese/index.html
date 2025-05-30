@@ -118,15 +118,13 @@
               progressBarFull.style.width = progressPercent + "%";
             }).then((unityInstance) => {
               loadingBar.style.display = "none";
-            }).catch((message) => {
-              unityShowBanner(`Hata: ${message}`, 'error');
-              loadingBar.style.display = "none";
+            }).catch((_) => {
+              //
             });
           };
           document.body.appendChild(script);
-        } catch (error) {
-          unityShowBanner(`Unity yüklenemedi: ${error.message}`, 'error');
-          loadingBar.style.display = "none";
+        } catch (_) {
+          //
         }
       }
 
