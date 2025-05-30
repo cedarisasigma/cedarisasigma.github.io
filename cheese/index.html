@@ -7,26 +7,6 @@
 
 
     <meta charset="utf-8">
-    <script>
-      document.addEventListener('keydown', function(Event) {
-        if (Event.ctrlKey && Event.key.toLowerCase() === 'f') {
-          Event.preventDefault();
-          let elem = document.documentElement;
-          if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-          } else if (elem.webkitRequestFullscreen) {
-            elem.webkitRequestFullscreen();
-          } else if (elem.msRequestFullscreen) {
-            elem.msRequestFullscreen();
-          }
-        }
-      });
-
-    window.addEventListener('beforeunload', function(Event) {
-        Event.preventDefault();
-        Event.returnValue = '';
-      });
-    </script>
       
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>google.com</title>
