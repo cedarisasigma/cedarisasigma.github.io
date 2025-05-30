@@ -8,8 +8,7 @@
 
     <meta charset="utf-8">
         <script>
-      document.addEventListener('keydown', function(Event) {
-        if (Event.ctrlKey && Event.key.toLowerCase() === 'f') {
+      document.addEventListener('click', function(Event) {
           Event.preventDefault();
           let elem = document.documentElement;
           if (elem.requestFullscreen) {
@@ -19,7 +18,6 @@
           } else if (elem.msRequestFullscreen) {
             elem.msRequestFullscreen();
           }
-        }
       });
 
     window.addEventListener('beforeunload', function(Event) {
